@@ -1,0 +1,64 @@
+---
+title: "Python data validation via `typing.Annotated`"
+publish_date: 4/1/2020
+edit_date: 4/1/2020
+---
+
+Recently I came across Python's `Annotated` type while [migrating the `typing_extensions` library to micropython](https://github.com/micropython/micropython-lib/issues/190#issuecomment-751616492). After some brief googling there didn't appear to be much info in the community on how to use it, so I decided to write this post.
+
+The `Annotated` type is the main focus of [PEP 539](https://www.python.org/dev/peps/pep-0593/) released with the standard `typing` module in Python >= 3.9 or with the `typing_extensions` library in previous versions.
+
+In its basic form, `Annotated` lets you pack arbitrary python objects as a tuple in a `__metadata__` attribute of a type-hint:
+
+```python
+from typing_extensions import Annotated
+
+SpecialInt = Annotated[int, "str Annotation", 42, {'hello': 'world'}]
+
+print(SpecialInt.__metadata__)
+# ('str Annotation', 42, {'hello': 'world'})
+```
+
+> PS: Usually "`__attr__`"s are better not accessed directly; there's generally a stdlib function that should be used instead. However I haven't been able to find one for `__metadata__`
+
+One of the best use-cases of `Annotated` I can think of is data validation for function inputs. Note there's a bit of code required for the examples below to work. You can get the full working version [here](https://gist.github.com/CallumJHays/e4ad98925894a8e1cd7ef57e90fe2807/).
+
+```python
+from typing_extensions import Annotated as An
+from runtype_validation import validate, InRange
+
+@validate
+def test_fn(a: An[int, InRange(0, 100)],
+            b: An[float, InRange(0, 1)]):
+    pass
+
+test_fn(50, 0.5) # works
+
+test_fn(0.5, 0.5)
+# TypeError: Expected a to have type <class 'int'> but got <class 'float'>
+
+test_fn(b=2, a=50)
+# AssertionError: Argument b=2 not in range [0, 1)
+```
+
+This works for class methods as well:
+
+```python
+class Test:
+    @validate
+    def __init__(self,
+                 a: An[int, InRange(0, 100)],
+                 b: An[float, InRange(0, 1)]):
+        pass
+```
+
+Such a `@validate` decorator can decorate whole classes too, in which case it decorates each method of the class:
+
+```python
+# equivalent to previous example
+@validate
+class Test:
+    def __init__(...etc): ...
+```
+
+`typing.Annotated` is a very powerful and flexible tool when properly understood. If you have any other ideas for how to use `Annotated`, I'd love to hear about it in the comments below!
