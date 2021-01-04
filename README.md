@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+Big thank you to [@gregrickaby](https://github.com/gregrickaby) for making the gh-pages deploy super simple with his guide:
+https://github.com/gregrickaby/nextjs-github-pages
+
 ## Getting Started
 
 First, run the development server:
