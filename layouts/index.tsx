@@ -13,7 +13,8 @@ export default function BlogLayout({ children, frontMatter }) {
       <DiscussionEmbed
         shortname="callumjhays"
         config={{
-          url: "http://localhost:3000/blog/python_annotated_type_03012020", // might cause issues with SSR
+          url:
+            "https://callumjhays.github.io/blog/python_annotated_type_04012020", // might cause issues with SSR
           identifier: "python_annotated_type_03012020",
           title: "Python data validation via typing.Annotated",
         }}
