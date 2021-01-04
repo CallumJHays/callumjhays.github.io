@@ -28,10 +28,10 @@ export function GithubActivity() {
 var OrigGitHubActivity = (function () {
   "use strict";
 
-  var obj = {};
+  var obj: any = {};
 
   var methods = {
-    renderLink: function (url, title, cssClass) {
+    renderLink: function (url, title = undefined, cssClass = undefined) {
       if (!title) {
         title = url;
       }
@@ -43,7 +43,7 @@ var OrigGitHubActivity = (function () {
         { url: url, title: title }
       );
     },
-    renderGitHubLink: function (url, title, cssClass) {
+    renderGitHubLink: function (url, title = undefined, cssClass = undefined) {
       if (!title) {
         title = url;
       }
@@ -210,7 +210,7 @@ var OrigGitHubActivity = (function () {
 
       var message = Mustache.render(templates[data.type], data);
       var timeString = millisecondsToStr(
-        new Date() - new Date(data.created_at)
+        +new Date() - +new Date(data.created_at)
       );
       var icon;
 
@@ -574,16 +574,15 @@ function hex(a) {
 function md5(a) {
   return hex(md51(a));
 }
-function add32(d, c) {
-  return (d + c) & 4294967295;
-}
-if (md5("hello") != "5d41402abc4b2a76b9719d911017c592") {
-  function add32(a, d) {
-    var c = (a & 65535) + (d & 65535),
-      b = (a >> 16) + (d >> 16) + (c >> 16);
-    return (b << 16) | (c & 65535);
-  }
-}
+
+const add32 =
+  md5("hello") != "5d41402abc4b2a76b9719d911017c592"
+    ? (a, d) => {
+        var c = (a & 65535) + (d & 65535),
+          b = (a >> 16) + (d >> 16) + (c >> 16);
+        return (b << 16) | (c & 65535);
+      }
+    : (d, c) => (d + c) & 4294967295;
 
 var templates = {
     Stream:

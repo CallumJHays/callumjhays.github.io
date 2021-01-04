@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "echo \"no tests yet\"",
     "export": "next export",
-    "start": "next start"
+    "start": "next start",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@maferland/github-activity": "^0.2.4",
@@ -14,9 +16,11 @@
     "@types/babel__core": "^7.1.12",
     "disqus-react": "^1.0.10",
     "fast-glob": "^2.2.7",
+    "husky": "^5.0.6",
     "mustache": "^4.1.0",
     "next": "10.0.4",
     "next-mdx-enhanced": "^5.0.0",
+    "pinst": "^2.1.1",
     "postcss": "^8.1.13",
     "prism-react-renderer": "^1.1.1",
     "react": "17.0.1",
