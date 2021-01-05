@@ -15,7 +15,7 @@ export default function BlogLayout({ children, frontMatter }) {
         config={{
           url:
             "https://callumjhays.github.io/blog/python_annotated_type_04012020", // might cause issues with SSR
-          identifier: "python_annotated_type_03012020",
+          identifier: "python_annotated_type_04012020",
           title: "Python data validation via typing.Annotated",
         }}
       />

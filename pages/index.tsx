@@ -5,8 +5,8 @@ export default function HomePage() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Callum Hays</title>
+
         {/* external deps? in 2020? yikes. */}
         <link
           rel="stylesheet"
@@ -24,6 +24,8 @@ export default function HomePage() {
         ></script>
       </Head>
 
+      <GithubActivity />
+
       {/* <main className={styles.main}>
         <h1 className={styles.title}>Cal Hays</h1>
 
@@ -31,7 +33,6 @@ export default function HomePage() {
         <p>Tech Blog, Resume</p>
 
         <div className={styles.githubfeed}>
-          <GithubActivity />
         </div>
       </main> */}
     </div>

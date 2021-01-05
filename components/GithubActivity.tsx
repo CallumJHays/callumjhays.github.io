@@ -504,6 +504,7 @@ function md5cycle(f, h) {
   f[2] = add32(j, f[2]);
   f[3] = add32(i, f[3]);
 }
+
 function cmn(h, e, d, c, g, f) {
   e = add32(add32(e, h), add32(c, f));
   return add32((e << g) | (e >>> (32 - g)), d);
@@ -575,14 +576,17 @@ function md5(a) {
   return hex(md51(a));
 }
 
-const add32 =
-  md5("hello") != "5d41402abc4b2a76b9719d911017c592"
-    ? (a, d) => {
-        var c = (a & 65535) + (d & 65535),
-          b = (a >> 16) + (d >> 16) + (c >> 16);
-        return (b << 16) | (c & 65535);
-      }
-    : (d, c) => (d + c) & 4294967295;
+function add32(d, c) {
+  return (d + c) & 4294967295;
+}
+if (md5("hello") != "5d41402abc4b2a76b9719d911017c592") {
+  // @ts-ignore
+  function add32(a, d) {
+    var c = (a & 65535) + (d & 65535),
+      b = (a >> 16) + (d >> 16) + (c >> 16);
+    return (b << 16) | (c & 65535);
+  }
+}
 
 var templates = {
     Stream:
