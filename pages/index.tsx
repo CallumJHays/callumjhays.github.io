@@ -5,22 +5,17 @@ export default function HomePage() {
   return (
     <div>
       <Head>
-        <title>Callum Hays</title>
+        <title>Cal Hays</title>
 
-        {/* external deps? in 2020? yikes. */}
+        {/* external deps? in 2020? yikes. Could fix this*/}
         <link
           rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css"
         />
-        <link rel="stylesheet" href="github-activity-0.1.5.min.css" />
 
         <script
           type="text/javascript"
           src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"
-        ></script>
-        <script
-          type="text/javascript"
-          src="github-activity-0.1.5.min.js"
         ></script>
       </Head>
 
