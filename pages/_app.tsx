@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import "styles/globals.scss";
+import "styles/global.scss";
 import "styles/github-activity.css";
 import Particles from "react-tsparticles";
 
@@ -17,9 +17,7 @@ function MyApp({ Component, pageProps }) {
         id="particle-background"
         options={{
           background: {
-            color: {
-              value: "ghostwhite",
-            },
+            color: "#fefefe",
           },
           backgroundMode: {
             enable: true,
@@ -34,7 +32,7 @@ function MyApp({ Component, pageProps }) {
               },
             },
             color: {
-              value: ["#9be9a8", "#ebedf0"],
+              value: ["#ebedf0", "#d2fcd9"],
               // value: ["#2EB67D", "#ECB22E", "#E01E5B", "#36C5F0"],
             },
             shape: {
