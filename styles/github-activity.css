@@ -9,7 +9,7 @@
 
 .gha-feed {
   width: 100%;
-  max-height: 70vh;
+  height: 100%;
   background: #fff;
   font-weight: bold;
   font-size: 14px;
@@ -79,6 +79,7 @@ span.gha-time {
 }
 
 .gha-header {
+  display: none;
   position: absolute;
   top: 1px;
   left: 1px;
@@ -111,6 +112,7 @@ span.gha-time {
 }
 
 .gha-footer {
+  display: none;
   position: absolute;
   bottom: -1px;
   left: 1px;
@@ -266,6 +268,7 @@ span.gha-time {
 }
 
 .gha-gravatar-commit {
+  display: inline;
   margin-bottom: -3px;
   border-radius: 2px;
 }
@@ -320,6 +323,7 @@ span.gha-time {
 }
 .gha-push {
   height: 87px;
+  display: none;
 }
 .gha-push-small {
   height: 26px;

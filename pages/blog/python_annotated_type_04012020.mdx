@@ -19,7 +19,9 @@ print(SpecialInt.__metadata__)
 # ('str Annotation', 42, {'hello': 'world'})
 ```
 
-> PS: Usually "`__attr__`"s are better not accessed directly; there's generally a stdlib function that should be used instead. However I haven't been able to find one for `__metadata__`
+> PS: Usually "`__attr__`"s are better not accessed directly; there's
+> generally a stdlib function that should be used instead (such as
+> `setattr()`). However I haven't been able to find one for `__metadata__` (¯\\\_(ツ)\_/¯)
 
 One of the best use-cases of `Annotated` I can think of is data validation for function inputs. Note there's a bit of code required for the examples below to work. You can get the full working version [here](https://gist.github.com/CallumJHays/e4ad98925894a8e1cd7ef57e90fe2807/).
 

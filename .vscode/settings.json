@@ -1,5 +1,5 @@
 {
   "python.pythonPath": "/home/cal/.conda/bin/python",
-  // for tailwindcss extension
-  "css.validate": false
+  // for tailwindcss; should use stylelint instead (vscode)
+  "scss.validate": false
 }

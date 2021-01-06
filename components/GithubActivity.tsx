@@ -1,7 +1,7 @@
 import Mustache from "mustache";
 import { useRef, useEffect } from "react";
 
-export function GithubActivity() {
+export function GithubActivity(divProps) {
   const ref = useRef();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export function GithubActivity() {
     });
   }, []);
 
-  return <div ref={ref} />;
+  return <div ref={ref} {...divProps} />;
 }
 
 /*!

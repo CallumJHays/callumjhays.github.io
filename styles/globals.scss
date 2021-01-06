@@ -1,16 +1,20 @@
-// html,
-// body {
-//   padding: 0;
-//   margin: 0;
-//   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-//     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-// }
+// temporary - re-enable if useful
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-// a {
-//   color: inherit;
-//   text-decoration: none;
-// }
+h1 {
+  @apply text-5xl;
+}
 
-// * {
-//   box-sizing: border-box;
-// }
+h2 {
+  @apply text-2xl;
+}
+
+.react-github-calendar svg {
+  @apply bg-gray-50;
+}
+
+.panel {
+  @apply border-b-4 border-r-2 rounded border-gray-400 col-span-2 p-2 bg-gray-50;
+}
