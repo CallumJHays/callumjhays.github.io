@@ -1,8 +1,7 @@
 import Head from "next/head";
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useRef, useState } from "react";
 
 function SkillBar({ proficiency }) {
   const segments = [];
@@ -28,12 +27,49 @@ function SkillBar({ proficiency }) {
 }
 
 function ProjectPreview({ name }) {
-  return (
+  const [active, setActive] = useState(false);
+  const ref = useRef<HTMLVideoElement>();
+
+  const vid = (
     <video
-      className="h-18 rounded border-2 border-gray-400 m-1"
+      ref={ref}
+      className="h-full"
+      preload="none"
       src={require(`assets/${name}.webm`)}
       poster={require(`assets/${name}.png`)}
     />
+  );
+
+  return (
+    <>
+      <div
+        className="h-20 inline-block border-4 border-gray-200"
+        onMouseEnter={() => {
+          if (ref.current.preload == "none") {
+            ref.current.preload = "auto";
+            ref.current.onloadeddata = ref.current.play;
+          } else {
+            ref.current.currentTime = 0;
+            ref.current.play();
+          }
+          setActive(true);
+        }}
+        onMouseLeave={() => {
+          ref.current.pause();
+          setActive(false);
+        }}
+      >
+        {vid}
+      </div>
+      <div
+        className={
+          "absolute left-14 -top-56 z-10 h-64 w-96" +
+          (active ? null : " hidden")
+        }
+      >
+        {vid}
+      </div>
+    </>
   );
 }
 
@@ -113,26 +149,20 @@ export default function HomePage() {
         <div className="panel row-span-2 md:col-span-3">
           <h2>Blog</h2>
           <p>Python Annotated type</p>
+          <span className="underline text-green-500 pr-3">See More</span>
         </div>
 
-        <div className="panel md:col-span-3">
-          <h2>Personal Projects</h2>
-          <Carousel
-            showArrows
-            centerMode
-            autoPlay
-            showIndicators={false}
-            infiniteLoop
-            showThumbs={false}
-            centerSlidePercentage={35}
-            className="rounded select-none"
-            // className="flex flex-row justify-around overflow-hidden"
-          >
+        <div className="panel md:col-span-3 relative">
+          <span className="underline text-green-500 float-right pr-3">
+            See All
+          </span>
+          <h2>Projects</h2>
+          <div className="overflow-x-scroll whitespace-nowrap">
             <ProjectPreview name="BdsimWeb" />
             <ProjectPreview name="Hillary" />
             <ProjectPreview name="RooBlocks" />
             <ProjectPreview name="ConfigApp" />
-          </Carousel>
+          </div>
         </div>
 
         <div className="md:col-span-6 tablet-hidden monitor-block">

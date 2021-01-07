@@ -11,8 +11,5 @@ module.exports = {
     //   "2xl": { min: "1536px" },
     // },
   },
-  variants: {
-    extend: {},
-  },
   plugins: [],
 };

@@ -20,10 +20,6 @@ h2 {
   // margin-bottom: auto; // remove weird white-space caused by css-grid
 }
 
-.carousel .slide {
-  background: white !important;
-}
-
 @media only screen and (max-width: 640px) {
   .xs-flex-col {
     flex-direction: column;
@@ -42,6 +38,7 @@ h2 {
     display: block;
   }
 }
+
 
 // @mixin text-outline($color, $thickness: 2px) {
 //   text-shadow: -$thickness -$thickness 0 $color, $thickness -$thickness 0 $color,
