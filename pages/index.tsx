@@ -44,11 +44,11 @@ export default function HomePage() {
         <title>Cal Hays</title>
       </Head>
 
-      <main className="font-mono container mx-auto lg:w-10/12 xl:w-9/12 grid grid-cols-1 md:grid-cols-6 gap-4 h-screen p-10">
-        <article className="md:col-span-3 lg:col-span-4 flex flex-row justify-center sm:justify-around xs-flex-col">
+      <main className="font-mono container mx-auto grid grid-cols-1 md:grid-cols-6 gap-4 h-screen p-4 max-w-3xl">
+        <article className="md:col-span-4 flex flex-row justify-center sm:justify-around xs-flex-col">
           <img
             src={require("assets/me.png")}
-            className="sm:block md:hidden lg:block max-h-36 object-contain"
+            className="max-h-36 object-contain"
           />
           <div className="whitespace-nowrap text-center sm:text-left mt-4 sm:mt-0">
             <h1>Callum Hays</h1>
@@ -73,16 +73,26 @@ export default function HomePage() {
           </div>
         </article>
 
-        <a className="panel cursor-pointer md:col-span-3 lg:col-span-2">
+        <a className="panel cursor-pointer md:col-span-2 lg:col-span-2">
           <h2 className="inline">Skills</h2>
           <span className="underline text-green-500 float-right pr-3">
             See More
           </span>
-          <div className="grid grid-cols-2 gap-0">
-            Electrical: <SkillBar proficiency={5} />
-            Software: <SkillBar proficiency={7} />
-            Mechanical: <SkillBar proficiency={3} />
-            Social: <SkillBar proficiency={4} />
+
+          <div className="flex flex-row justify-around">
+            <div className="grid grid-cols-2">
+              Electrical: <SkillBar proficiency={5} />
+              Software: <SkillBar proficiency={7} />
+              Mechanical: <SkillBar proficiency={3} />
+              Social: <SkillBar proficiency={4} />
+            </div>
+
+            <div className="grid-cols-2 hidden sm:grid md:hidden">
+              Design: <SkillBar proficiency={3} />
+              Frontend: <SkillBar proficiency={7} />
+              Dev-Ops: <SkillBar proficiency={6} />
+              Data Science: <SkillBar proficiency={5} />
+            </div>
           </div>
         </a>
 
@@ -91,7 +101,9 @@ export default function HomePage() {
             See More
           </span>
           <h2>Experience</h2>
-          <ul className="list-disc list-inside">
+          <ul className="list-disc list-inside text-sm">
+            <li>Techstars Music Alumni</li>
+            <li>Endorsed by Dist. Prof. Peter Corke</li>
             <li>Software Engineer @ Popgun AI</li>
             <li>Desktop Model Control Engineer @ Verton</li>
             <li>Machine Learning Intern @ Notiv</li>
@@ -104,11 +116,12 @@ export default function HomePage() {
         </div>
 
         <div className="panel md:col-span-3">
-          <h2>Projects</h2>
+          <h2>Personal Projects</h2>
           <Carousel
             showArrows
             centerMode
             autoPlay
+            showIndicators={false}
             infiniteLoop
             showThumbs={false}
             centerSlidePercentage={35}
