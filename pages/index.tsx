@@ -1,6 +1,8 @@
 import Head from "next/head";
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function SkillBar({ proficiency }) {
   const segments = [];
@@ -25,6 +27,16 @@ function SkillBar({ proficiency }) {
   return <div className="whitespace-nowrap">{segments}</div>;
 }
 
+function ProjectPreview({ name }) {
+  return (
+    <video
+      className="h-18 rounded border-2 border-gray-400 m-1"
+      src={require(`assets/${name}.webm`)}
+      poster={require(`assets/${name}.png`)}
+    />
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -35,7 +47,7 @@ export default function HomePage() {
       <main className="font-mono container mx-auto lg:w-10/12 xl:w-9/12 grid grid-cols-1 md:grid-cols-6 gap-4 h-screen p-10">
         <article className="md:col-span-3 lg:col-span-4 flex flex-row justify-center sm:justify-around xs-flex-col">
           <img
-            src={require("images/me.png")}
+            src={require("assets/me.png")}
             className="sm:block md:hidden lg:block max-h-36 object-contain"
           />
           <div className="whitespace-nowrap text-center sm:text-left mt-4 sm:mt-0">
@@ -75,6 +87,9 @@ export default function HomePage() {
         </a>
 
         <div className="md:col-span-3 panel">
+          <span className="underline text-green-500 float-right pr-3">
+            See More
+          </span>
           <h2>Experience</h2>
           <ul className="list-disc list-inside">
             <li>Software Engineer @ Popgun AI</li>
@@ -90,11 +105,21 @@ export default function HomePage() {
 
         <div className="panel md:col-span-3">
           <h2>Projects</h2>
-          <ul className="list-disc list-inside">
-            <li>Simulink for Python</li>
-            <li>Hexapod & Mobile App</li>
-            <li>Matlab Utility Library</li>
-          </ul>
+          <Carousel
+            showArrows
+            centerMode
+            autoPlay
+            infiniteLoop
+            showThumbs={false}
+            centerSlidePercentage={35}
+            className="rounded select-none"
+            // className="flex flex-row justify-around overflow-hidden"
+          >
+            <ProjectPreview name="BdsimWeb" />
+            <ProjectPreview name="Hillary" />
+            <ProjectPreview name="RooBlocks" />
+            <ProjectPreview name="ConfigApp" />
+          </Carousel>
         </div>
 
         <div className="md:col-span-6 tablet-hidden monitor-block">

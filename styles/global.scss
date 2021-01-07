@@ -20,6 +20,10 @@ h2 {
   // margin-bottom: auto; // remove weird white-space caused by css-grid
 }
 
+.carousel .slide {
+  background: white !important;
+}
+
 @media only screen and (max-width: 640px) {
   .xs-flex-col {
     flex-direction: column;
