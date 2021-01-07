@@ -138,11 +138,11 @@ export default function HomePage() {
           </span>
           <h2>Experience</h2>
           <ul className="list-disc list-inside text-sm">
-            <li>Techstars Music Alumni</li>
-            <li>Endorsed by Dist. Prof. Peter Corke</li>
+            <li>Techstars Music Alumni (2017)</li>
             <li>Software Engineer @ Popgun AI</li>
             <li>Desktop Model Control Engineer @ Verton</li>
             <li>Machine Learning Intern @ Notiv</li>
+            <li>Computer Systems (CAB102) Tutor @ QUT</li>
           </ul>
         </div>
 
