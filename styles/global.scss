@@ -20,8 +20,23 @@ h2 {
   // margin-bottom: auto; // remove weird white-space caused by css-grid
 }
 
-.brighter img {
-  filter: brightness(100%);
+@media only screen and (max-width: 640px) {
+  .xs-flex-col {
+    flex-direction: column;
+  }
+}
+
+// don't show github
+@media only screen and (min-height: 300px) and (min-width: 768px) {
+  .tablet-hidden {
+    display: none;
+  }
+}
+
+@media only screen and (min-height: 660px) and (min-width: 768px) {
+  .monitor-block {
+    display: block;
+  }
 }
 
 // @mixin text-outline($color, $thickness: 2px) {

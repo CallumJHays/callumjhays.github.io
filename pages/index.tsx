@@ -33,16 +33,12 @@ export default function HomePage() {
       </Head>
 
       <main className="font-mono container mx-auto lg:w-10/12 xl:w-9/12 grid grid-cols-1 md:grid-cols-6 gap-4 h-screen p-10">
-        <article className="md:col-span-3 lg:col-span-4 flex flex-row justify-around">
-          <div className="align-baseline xs:block sm:inline-block md:hidden lg:inline-block">
-            <img
-              width="145"
-              height="145"
-              src={require("images/circle-cropped4.png")}
-              className="rounded-full"
-            />
-          </div>
-          <div className="whitespace-nowrap inline-block">
+        <article className="md:col-span-3 lg:col-span-4 flex flex-row justify-center sm:justify-around xs-flex-col">
+          <img
+            src={require("images/me.png")}
+            className="sm:block md:hidden lg:block max-h-36 object-contain"
+          />
+          <div className="whitespace-nowrap text-center sm:text-left mt-4 sm:mt-0">
             <h1>Callum Hays</h1>
             <p className="pb-1">
               <i>
@@ -65,9 +61,11 @@ export default function HomePage() {
           </div>
         </article>
 
-        <a className="panel cursor-pointer md:col-span-3 lg:col-span-2 h-36">
+        <a className="panel cursor-pointer md:col-span-3 lg:col-span-2">
           <h2 className="inline">Skills</h2>
-          <a className="underline text-green-500 float-right pr-3">See More</a>
+          <span className="underline text-green-500 float-right pr-3">
+            See More
+          </span>
           <div className="grid grid-cols-2 gap-0">
             Electrical: <SkillBar proficiency={5} />
             Software: <SkillBar proficiency={7} />
@@ -76,7 +74,7 @@ export default function HomePage() {
           </div>
         </a>
 
-        <div className="panel md:col-span-3">
+        <div className="md:col-span-3 panel">
           <h2>Experience</h2>
           <ul className="list-disc list-inside">
             <li>Software Engineer @ Popgun AI</li>
@@ -99,7 +97,7 @@ export default function HomePage() {
           </ul>
         </div>
 
-        <div className="md:col-span-6">
+        <div className="md:col-span-6 tablet-hidden monitor-block">
           <GitHubCalendar username="callumjhays">
             <ReactTooltip delayShow={50} html />
           </GitHubCalendar>
