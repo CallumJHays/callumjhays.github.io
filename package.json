@@ -13,6 +13,7 @@
   "dependencies": {
     "@maferland/github-activity": "^0.2.4",
     "@mdx-js/loader": "^1.6.22",
+    "@next/bundle-analyzer": "^10.0.5",
     "@types/babel__core": "^7.1.12",
     "autoprefixer": "^10.1.0",
     "disqus-react": "^1.0.10",
