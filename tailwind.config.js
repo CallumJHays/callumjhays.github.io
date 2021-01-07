@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["./pages/**/*.js", "./components/**/*.js"],
+  purge: ["./pages/**/*.tsx", "./components/**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
@@ -9,11 +9,6 @@ module.exports = {
       lg: { min: "1024px" },
       xl: { min: "1280px" },
       "2xl": { min: "1536px" },
-    },
-    extend: {
-      screens: {
-        xs: "300px",
-      },
     },
   },
   variants: {

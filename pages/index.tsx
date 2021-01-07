@@ -1,13 +1,13 @@
 import Head from "next/head";
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
-import Image from "next/image";
 
 function SkillBar({ proficiency }) {
   const segments = [];
   for (let i = 0; i < proficiency; i++) {
     segments.push(
       <span
+        key={i}
         className="h-3 w-3 inline-block ml-1"
         style={{ background: "#9be9a8" }}
       ></span>
@@ -16,6 +16,7 @@ function SkillBar({ proficiency }) {
   for (let i = proficiency; i < 7; i++) {
     segments.push(
       <span
+        key={i}
         className="h-3 w-3 inline-block ml-1"
         style={{ background: "#ebedf0" }}
       ></span>
@@ -34,10 +35,10 @@ export default function HomePage() {
       <main className="font-mono container mx-auto lg:w-10/12 xl:w-9/12 grid grid-cols-1 md:grid-cols-6 gap-4 h-screen p-10">
         <article className="md:col-span-3 lg:col-span-4 flex flex-row justify-around">
           <div className="align-baseline xs:block sm:inline-block md:hidden lg:inline-block">
-            <Image
+            <img
               width="145"
               height="145"
-              src="/circle-cropped4.png"
+              src={require("images/circle-cropped4.png")}
               className="rounded-full"
             />
           </div>
