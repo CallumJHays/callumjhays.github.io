@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.front-page {
+  @apply font-mono container mx-auto grid grid-cols-1 md:grid-cols-6 gap-4 h-screen p-4 max-w-3xl;
+  max-height: 43rem;
+}
+
 h1 {
   @apply text-5xl;
 }
@@ -38,7 +43,6 @@ h2 {
     display: block;
   }
 }
-
 
 // @mixin text-outline($color, $thickness: 2px) {
 //   text-shadow: -$thickness -$thickness 0 $color, $thickness -$thickness 0 $color,

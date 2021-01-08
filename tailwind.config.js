@@ -2,6 +2,11 @@ module.exports = {
   purge: ["./pages/**/*.tsx", "./components/**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    extend: {
+      screens: {
+        sm: "550px",
+      },
+    },
     // screens: {
     //   xs: { min: "300px" }, //can't get this to work... it keeps stuffing up default 'sm' styles
     //   sm: { min: "640px" },
