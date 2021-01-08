@@ -2,6 +2,7 @@ import Head from "next/head";
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
 import { useRef, useState } from "react";
+import Loader from "components/Loader";
 
 function SkillBar({ proficiency }) {
   return (
@@ -19,10 +20,12 @@ function SkillBar({ proficiency }) {
 
 function ProjectPreview({ name }) {
   const [active, setActive] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const ref = useRef<HTMLVideoElement>();
 
   const vid = (
     <video
+      loop
       ref={ref}
       className="h-full"
       preload="none"
@@ -38,7 +41,10 @@ function ProjectPreview({ name }) {
         onMouseEnter={() => {
           if (ref.current.preload == "none") {
             ref.current.preload = "auto";
-            ref.current.onloadeddata = ref.current.play;
+            ref.current.onloadeddata = () => {
+              ref.current.play();
+              setLoaded(true);
+            };
           } else {
             ref.current.currentTime = 0;
             ref.current.play();
@@ -54,11 +60,10 @@ function ProjectPreview({ name }) {
       </div>
       <div
         className={
-          "absolute left-14 -top-56 z-10 h-64 w-96" +
-          (active ? null : " hidden")
+          "absolute left-14 -top-56 z-10 h-64 w-96" + (active ? "" : " hidden")
         }
       >
-        {vid}
+        <Loader loaded={loaded}>{vid}</Loader>
       </div>
     </>
   );
@@ -74,7 +79,7 @@ export default function HomePage() {
         <main className="front-page">
           <article className="md:col-span-4 flex flex-col sm:flex-row justify-center">
             <img
-              src={require("assets/me.png")}
+              src={require("assets/me.png?webp&resize")}
               className="max-h-36 object-contain pr-4"
             />
             <div className="whitespace-nowrap text-center sm:text-left mt-4 sm:mt-0">
@@ -118,7 +123,7 @@ export default function HomePage() {
                 Design: <SkillBar proficiency={3} />
                 Frontend: <SkillBar proficiency={7} />
                 Dev-Ops: <SkillBar proficiency={6} />
-                Data Science: <SkillBar proficiency={5} />
+                Data-Science: <SkillBar proficiency={5} />
               </div>
             </div>
           </a>

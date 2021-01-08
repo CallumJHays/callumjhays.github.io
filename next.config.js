@@ -9,7 +9,14 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 module.exports = withPlugins(
   [
-    optimizedImages,
+    [
+      optimizedImages,
+      {
+        responsive: {
+          adapter: require("responsive-loader/sharp"),
+        },
+      },
+    ],
     withVideos,
     withBundleAnalyzer,
     withMdxEnhanced({

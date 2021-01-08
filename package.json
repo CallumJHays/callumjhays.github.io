@@ -11,17 +11,14 @@
     "postinstall": "husky install"
   },
   "dependencies": {
-    "@maferland/github-activity": "^0.2.4",
     "@mdx-js/loader": "^1.6.22",
     "@next/bundle-analyzer": "^10.0.5",
-    "@types/babel__core": "^7.1.12",
     "autoprefixer": "^10.1.0",
     "disqus-react": "^1.0.10",
     "fast-glob": "^2.2.7",
     "husky": "^5.0.6",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^8.0.0",
-    "mustache": "^4.1.0",
     "next": "10.0.4",
     "next-compose-plugins": "^2.2.1",
     "next-mdx-enhanced": "^5.0.0",
@@ -35,11 +32,14 @@
     "react-github-calendar": "^2.0.1",
     "react-tooltip": "^4.2.11",
     "react-tsparticles": "^1.18.11",
+    "responsive-loader": "^2.3.0",
+    "sharp": "^0.26.2",
+    "svg-sprite-loader": "^5.2.1",
     "tailwindcss": "^2.0.2",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.3",
+    "webp-loader": "^0.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^6.1.10",
     "babel-loader": "^8.2.2",
