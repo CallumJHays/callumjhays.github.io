@@ -4,26 +4,17 @@ import ReactTooltip from "react-tooltip";
 import { useRef, useState } from "react";
 
 function SkillBar({ proficiency }) {
-  const segments = [];
-  for (let i = 0; i < proficiency; i++) {
-    segments.push(
-      <span
-        key={i}
-        className="h-3 w-3 inline-block mx-px"
-        style={{ background: "#9be9a8" }}
-      ></span>
-    );
-  }
-  for (let i = proficiency; i < 7; i++) {
-    segments.push(
-      <span
-        key={i}
-        className="h-3 w-3 inline-block mx-px"
-        style={{ background: "#ebedf0" }}
-      ></span>
-    );
-  }
-  return <div className="whitespace-nowrap ml-2">{segments}</div>;
+  return (
+    <div className="whitespace-nowrap ml-2">
+      {Array.from({ length: 7 }).map((_, i) => (
+        <span
+          key={i}
+          className="h-3 w-3 inline-block mx-px"
+          style={{ background: i < proficiency ? "#9be9a8" : "#ebedf0" }}
+        ></span>
+      ))}
+    </div>
+  );
 }
 
 function ProjectPreview({ name }) {
