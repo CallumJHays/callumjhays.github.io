@@ -5,8 +5,9 @@ import CodeBlock from "components/CodeBlock";
 import { DiscussionEmbed } from "disqus-react";
 
 // This function must be named otherwise it disables Fast Refresh.
-export default function BlogLayout({ children, frontMatter }) {
-  // React hooks, for example `useState` or `useEffect`, go here.
+export default function BlogLayout({ children, ...rest }) {
+  console.log(rest);
+
   return (
     <>
       <MDXProvider components={{ code: CodeBlock }}>{children}</MDXProvider>

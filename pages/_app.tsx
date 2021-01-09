@@ -1,12 +1,21 @@
 import Head from "next/head";
 
-import "styles/global.scss";
-import "styles/github-activity.css";
+import "./tailwind.scss";
 import Particles from "react-tsparticles";
 
-function MyApp({ Component, pageProps }) {
+export default function AppRoot({ Component, pageProps }) {
   return (
     <>
+      <style jsx global>{`
+        h1 {
+          @apply text-5xl;
+        }
+
+        h2 {
+          @apply text-2xl;
+        }
+      `}</style>
+
       <Head>
         <link
           rel="icon"
@@ -101,5 +110,3 @@ function MyApp({ Component, pageProps }) {
     </>
   );
 }
-
-export default MyApp;

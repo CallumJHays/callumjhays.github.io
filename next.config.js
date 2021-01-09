@@ -21,6 +21,7 @@ module.exports = withPlugins(
     withBundleAnalyzer,
     withMdxEnhanced({
       defaultLayout: true,
+      layoutPath: "layouts/blog",
       remarkPlugins: [],
       rehypePlugins: [],
     }),

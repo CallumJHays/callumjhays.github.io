@@ -1,8 +1,14 @@
+import { useRef, useState } from "react";
+import Link from "next/link";
 import Head from "next/head";
+
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
-import { useRef, useState } from "react";
+import { NextSeo } from "next-seo";
+
 import Loader from "components/Loader";
+import Panel from "components/Panel";
+import LinkTextSpan from "components/LinkTextSpan";
 
 function SkillBar({ proficiency }) {
   return (
@@ -29,13 +35,22 @@ function ProjectPreview({ name }) {
       ref={ref}
       className="h-full"
       preload="none"
-      src={require(`assets/${name}.webm`)}
-      poster={require(`assets/${name}.png`)}
+      src={require(`assets/index/${name}.webm`)}
+      poster={require(`assets/index/${name}.png`)}
     />
   );
 
   return (
     <>
+      <style jsx>{`
+        h1 {
+          @apply text-5xl;
+        }
+
+        h2 {
+          @apply text-2xl;
+        }
+      `}</style>
       <div
         className="h-20 inline-block border-4 border-gray-200"
         onMouseEnter={() => {
@@ -69,17 +84,51 @@ function ProjectPreview({ name }) {
   );
 }
 
+function SeeMoreLink({ href, text = "See More", floatRight = false }) {
+  return (
+    <Link href={href}>
+      <LinkTextSpan className={floatRight ? "float-right pr-3" : null}>
+        {text}
+      </LinkTextSpan>
+    </Link>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
-      <Head>
-        <title>Cal Hays</title>
-      </Head>
+      <NextSeo title="Cal Hays" description="Callum Hays' Personal Website" />
+      <style jsx>{`
+        .front-page {
+          @apply font-mono container mx-auto grid grid-cols-1 md:grid-cols-6 gap-3 h-screen p-4 max-w-3xl;
+          max-height: 41rem;
+        }
+
+        @media only screen and (max-width: 640px) {
+          .xs-flex-col {
+            flex-direction: column;
+          }
+        }
+
+        // don't show github if it makes page too long
+        @media only screen and (min-height: 300px) and (min-width: 768px) {
+          .stout-hidden {
+            display: none;
+          }
+        }
+
+        @media only screen and (min-height: 660px) and (min-width: 768px) {
+          .stout-hidden {
+            display: block;
+          }
+        }
+      `}</style>
+
       <div className="h-screen flex flex-col justify-around">
         <main className="front-page">
           <article className="md:col-span-4 flex flex-col sm:flex-row justify-center">
             <img
-              src={require("assets/me.png?webp&resize")}
+              src={require("assets/index/me.png?webp&resize")}
               className="max-h-36 object-contain pr-4"
             />
             <div className="whitespace-nowrap text-center sm:text-left mt-4 sm:mt-0">
@@ -97,19 +146,18 @@ export default function HomePage() {
                 {/* <a className="cursor-pointer border rounded pt-1 pd-1 pl-3 pr-2 -m-1 bg-gray-50">
                 Contact Me 💬
               </a> */}
-                <a className="text-green-500 underline cursor-pointer">
-                  Contact Me
-                </a>{" "}
-                💬
+                <Link href={"/contact"}>
+                  <span>
+                    <LinkTextSpan>Contact Me</LinkTextSpan> 💬
+                  </span>
+                </Link>
               </p>
             </div>
           </article>
 
-          <a className="panel cursor-pointer md:col-span-2 lg:col-span-2">
+          <Panel className="md:col-span-2 lg:col-span-2">
+            <SeeMoreLink href="/resume" floatRight />
             <h2 className="inline">Skills</h2>
-            <span className="underline text-green-500 float-right pr-3">
-              See More
-            </span>
 
             <div className="flex flex-row justify-around">
               <div className="grid grid-cols-2">
@@ -126,12 +174,11 @@ export default function HomePage() {
                 Data-Science: <SkillBar proficiency={5} />
               </div>
             </div>
-          </a>
+          </Panel>
 
-          <div className="md:col-span-3 panel">
-            <span className="underline text-green-500 float-right pr-3">
-              See More
-            </span>
+          <Panel className="md:col-span-3">
+            <SeeMoreLink href="/resume" floatRight />
+
             <h2>Experience</h2>
             <ul className="list-disc list-inside text-sm">
               <li>Techstars Music Alumni (2017)</li>
@@ -140,32 +187,35 @@ export default function HomePage() {
               <li>Machine Learning Intern @ Notiv</li>
               <li>Computer Systems (CAB102) Tutor @ QUT</li>
             </ul>
-          </div>
+          </Panel>
 
-          <div className="panel row-span-2 md:col-span-3">
+          <Panel className="row-span-2 md:col-span-3">
             <h2>Blog</h2>
             <p>Python Annotated type</p>
-            <span className="underline text-green-500 pr-3">See More</span>
-          </div>
 
-          <div className="panel md:col-span-3 relative">
-            <span className="underline text-green-500 float-right pr-3">
-              See All
-            </span>
+            <SeeMoreLink href="/blog" />
+          </Panel>
+
+          <Panel className="md:col-span-3 relative">
+            <SeeMoreLink href="/projects" text="See All" floatRight />
             <h2>Projects</h2>
+
             <div className="overflow-x-scroll whitespace-nowrap">
               <ProjectPreview name="BdsimWeb" />
               <ProjectPreview name="Hillary" />
               <ProjectPreview name="RooBlocks" />
               <ProjectPreview name="ConfigApp" />
             </div>
+          </Panel>
+
+          <div className="md:col-span-6 stout-hidden">
+            <div className="h-40">
+              <GitHubCalendar username="callumjhays">
+                <ReactTooltip delayShow={50} html />
+              </GitHubCalendar>
+            </div>
           </div>
 
-          <div className="md:col-span-6 tablet-hidden monitor-block">
-            <GitHubCalendar username="callumjhays">
-              <ReactTooltip delayShow={50} html />
-            </GitHubCalendar>
-          </div>
           {/* <div className="md:col-span-2">
           <div className="flex flex-row justify-items-start mb-5 gap-7">
             <Image src="/Github.svg" width={50} height={50} />
