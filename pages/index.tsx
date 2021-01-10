@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
-import Head from "next/head";
 
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
@@ -42,15 +41,6 @@ function ProjectPreview({ name }) {
 
   return (
     <>
-      <style jsx>{`
-        h1 {
-          @apply text-5xl;
-        }
-
-        h2 {
-          @apply text-2xl;
-        }
-      `}</style>
       <div
         className="h-20 inline-block border-4 border-gray-200"
         onMouseEnter={() => {
@@ -101,6 +91,7 @@ export default function HomePage() {
       <style jsx>{`
         .front-page {
           @apply font-mono container mx-auto grid grid-cols-1 md:grid-cols-6 gap-3 h-screen p-4 max-w-3xl;
+
           max-height: 41rem;
         }
 
@@ -110,7 +101,7 @@ export default function HomePage() {
           }
         }
 
-        // don't show github if it makes page too long
+        /* don't show github if it makes page too long */
         @media only screen and (min-height: 300px) and (min-width: 768px) {
           .stout-hidden {
             display: none;

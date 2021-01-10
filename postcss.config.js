@@ -3,9 +3,8 @@
 module.exports = {
   // nextjs will warn about this not being used,
   // but it actually is; by styled-jsx-postcss-plugin
-  syntax: "postcss-scss",
   plugins: {
-    precss: {},
+    tailwindcss: {},
     "postcss-flexbugs-fixes": {},
     "postcss-preset-env": {
       autoprefixer: {
@@ -17,6 +16,5 @@ module.exports = {
         "nesting-rules": true,
       },
     },
-    tailwindcss: {},
   },
 };
