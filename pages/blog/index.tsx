@@ -1,59 +1,89 @@
 import fg from "fast-glob";
-import { IEntry } from "fast-glob/out/types/entries";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Panel from "components/Panel";
+import MainLayout from "layouts/main";
+import StyledLink from "components/StyledLink";
 
-type FrontMatter = {
+export type FrontMatter = {
   title: string;
-  image: string;
+  subtitle?: string;
+  description?: string; // for meta tag, if not included, defaults to 'subtitle' (if included)
+  tags?: string[];
+  preview: string; // image path (inside assets/blog dir)
+  published: string; // 1 Jan 2020 (format)
+  edited: string; // 1 Jan 2020 (format)
 };
 
 type Props = {
-  blogPosts: (FrontMatter & {
-    url: string;
-    createdMs: number;
-    editedMs: number;
-  })[];
+  blogPosts: (FrontMatter & { url: string })[];
 };
 
 export default function BlogIndexPage({ blogPosts }: Props) {
   return (
-    <Panel>
-      {blogPosts.map((post) => (
-        <Link key={post.url} href={post.url}>
-          {post.title}
-        </Link>
-      ))}
-    </Panel>
+    <MainLayout>
+      <style jsx>{`
+        .post-list {
+          @apply grid;
+
+          grid-template-columns: 1fr 8fr;
+        }
+      `}</style>
+
+      <h1 className="my-10 ml-4">Blog Posts</h1>
+
+      <Panel className="table w-full table-auto">
+        <tbody>
+          {blogPosts.map((post, idx) => {
+            const isLastBlogPost = idx === blogPosts.length - 1;
+            return (
+              <>
+                <Link key={post.url} href={post.url}>
+                  <tr className="cursor-pointer transform transition hover:scale-105">
+                    <td
+                      className={`p-2 hidden md:block ${
+                        isLastBlogPost ? null : "border-b"
+                      }`}
+                    >
+                      <img
+                        src={require(`assets/blog/${post.preview}`)}
+                        className="h-20 object-contain"
+                      />
+                    </td>
+
+                    <td className={`p-2 ${isLastBlogPost ? null : "border-b"}`}>
+                      <h2>{post.title}</h2>
+                      {post.subtitle ? <p>{post.subtitle}</p> : null}
+                    </td>
+                  </tr>
+                </Link>
+              </>
+            );
+          })}
+        </tbody>
+      </Panel>
+    </MainLayout>
   );
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const blogPosts = await Promise.all(
-    (await fg("pages/blog/*.mdx", { stats: true })).map(
-      async (file: IEntry) => {
-        const { path, mtimeMs, birthtimeMs } = file;
-        const filename = path.match(/blog\/(.*)+\.mdx/)[1];
+    (await fg("pages/blog/*.mdx")).map(async (filepath: string) => {
+      const filename = filepath.match(/blog\/(.*)+\.mdx/)[1];
 
-        // this line is very brittle. Webpack doin' some funky magic
-        const frontMatter: FrontMatter = (
-          await import(`pages/blog/${filename}.mdx`)
-        ).frontMatter;
+      // this line is very brittle. Webpack doin' some funky magic
+      const frontMatter: FrontMatter = (
+        await import(`pages/blog/${filename}.mdx`)
+      ).frontMatter;
 
-        return {
-          url: `/blog/${filename}`,
-          createdMs: birthtimeMs,
-          editedMs: mtimeMs,
-          ...frontMatter,
-        };
-      }
-    )
+      return {
+        url: `/blog/${filename}`,
+        ...frontMatter,
+      };
+    })
   );
 
   return {
-    props: {
-      blogPosts,
-    },
+    props: { blogPosts },
   };
 };

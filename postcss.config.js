@@ -1,20 +1,25 @@
 // postcss.config.js
+const isProd = process.env.NODE_ENV == "production";
 
 module.exports = {
-  // nextjs will warn about this not being used,
-  // but it actually is; by styled-jsx-postcss-plugin
   plugins: {
     tailwindcss: {},
-    "postcss-flexbugs-fixes": {},
+    "postcss-media-minmax": {},
     "postcss-preset-env": {
       autoprefixer: {
         flexbox: "no-2009",
       },
-      stage: 3,
+      stage: isProd ? 2 : false,
       features: {
         "custom-properties": false,
         "nesting-rules": true,
       },
     },
+    ...(isProd
+      ? {
+          "postcss-flexbugs-fixes": {},
+          cssnano: {},
+        }
+      : null),
   },
 };

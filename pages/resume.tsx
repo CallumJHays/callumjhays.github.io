@@ -1,3 +1,9 @@
+import MainLayout from "layouts/main";
+
 export default function ResumePage() {
-  return <div></div>;
+  return (
+    <MainLayout>
+      <h1>Resume</h1>
+    </MainLayout>
+  );
 }

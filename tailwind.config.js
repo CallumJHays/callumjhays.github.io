@@ -1,5 +1,8 @@
 module.exports = {
-  purge: ["./pages/**/*.tsx", "./components/**/*.tsx"],
+  purge:
+    process.env.NODE_ENV === "production"
+      ? ["./pages/**/*.tsx", "./components/**/*.tsx", "./layouts/**/*.tsx"]
+      : [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {

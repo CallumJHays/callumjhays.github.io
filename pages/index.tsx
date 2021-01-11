@@ -5,9 +5,11 @@ import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
 import { NextSeo } from "next-seo";
 
+import MainLayout from "layouts/main";
 import Loader from "components/Loader";
 import Panel from "components/Panel";
 import LinkTextSpan from "components/LinkTextSpan";
+import StyledLink from "components/StyledLink";
 
 function SkillBar({ proficiency }) {
   return (
@@ -74,48 +76,25 @@ function ProjectPreview({ name }) {
   );
 }
 
-function SeeMoreLink({ href, text = "See More", floatRight = false }) {
-  return (
-    <Link href={href}>
-      <LinkTextSpan className={floatRight ? "float-right pr-3" : null}>
-        {text}
-      </LinkTextSpan>
-    </Link>
-  );
-}
-
 export default function HomePage() {
   return (
     <>
       <NextSeo title="Cal Hays" description="Callum Hays' Personal Website" />
-      <style jsx>{`
-        .front-page {
-          @apply font-mono container mx-auto grid grid-cols-1 md:grid-cols-6 gap-3 h-screen p-4 max-w-3xl;
+      <MainLayout footer={false}>
+        <style jsx>{`
+          .front-page {
+            @apply font-mono grid grid-cols-1 md:grid-cols-6 gap-3;
 
-          max-height: 41rem;
-        }
-
-        @media only screen and (max-width: 640px) {
-          .xs-flex-col {
-            flex-direction: column;
+            max-height: 41rem;
           }
-        }
 
-        /* don't show github if it makes page too long */
-        @media only screen and (min-height: 300px) and (min-width: 768px) {
-          .stout-hidden {
-            display: none;
+          /* don't show github if it makes page fit awkwardly */
+          @media screen and (width >= 768px) and (300px <= height < 640px) {
+            .stout-hidden {
+              display: none;
+            }
           }
-        }
-
-        @media only screen and (min-height: 660px) and (min-width: 768px) {
-          .stout-hidden {
-            display: block;
-          }
-        }
-      `}</style>
-
-      <div className="h-screen flex flex-col justify-around">
+        `}</style>
         <main className="front-page">
           <article className="md:col-span-4 flex flex-col sm:flex-row justify-center">
             <img
@@ -147,7 +126,9 @@ export default function HomePage() {
           </article>
 
           <Panel className="md:col-span-2 lg:col-span-2">
-            <SeeMoreLink href="/resume" floatRight />
+            <StyledLink href="/resume" floatRight>
+              See More
+            </StyledLink>
             <h2 className="inline">Skills</h2>
 
             <div className="flex flex-row justify-around">
@@ -168,7 +149,9 @@ export default function HomePage() {
           </Panel>
 
           <Panel className="md:col-span-3">
-            <SeeMoreLink href="/resume" floatRight />
+            <StyledLink href="/resume" floatRight>
+              See More
+            </StyledLink>
 
             <h2>Experience</h2>
             <ul className="list-disc list-inside text-sm">
@@ -184,11 +167,13 @@ export default function HomePage() {
             <h2>Blog</h2>
             <p>Python Annotated type</p>
 
-            <SeeMoreLink href="/blog" />
+            <StyledLink href="/blog">See More</StyledLink>
           </Panel>
 
           <Panel className="md:col-span-3 relative">
-            <SeeMoreLink href="/projects" text="See All" floatRight />
+            <StyledLink href="/projects" floatRight>
+              See All
+            </StyledLink>
             <h2>Projects</h2>
 
             <div className="overflow-x-scroll whitespace-nowrap">
@@ -220,7 +205,7 @@ export default function HomePage() {
 
           {/* <GithubActivity className="md:col-span-3 h-24" /> */}
         </main>
-      </div>
+      </MainLayout>
     </>
   );
 }
