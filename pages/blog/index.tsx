@@ -13,6 +13,7 @@ export type FrontMatter = {
   preview: string; // image path (inside assets/blog dir)
   published: string; // 1 Jan 2020 (format)
   edited: string; // 1 Jan 2020 (format)
+  __resourcePath: string; // filepath
 };
 
 type Props = {
@@ -32,12 +33,12 @@ export default function BlogIndexPage({ blogPosts }: Props) {
 
       <h1 className="my-10 ml-4">Blog Posts</h1>
 
-      <Panel className="table w-full table-auto">
-        <tbody>
-          {blogPosts.map((post, idx) => {
-            const isLastBlogPost = idx === blogPosts.length - 1;
-            return (
-              <>
+      <Panel className="">
+        <table>
+          <tbody>
+            {blogPosts.map((post, idx) => {
+              const isLastBlogPost = idx === blogPosts.length - 1;
+              return (
                 <Link key={post.url} href={post.url}>
                   <tr className="cursor-pointer transform transition hover:scale-105">
                     <td
@@ -57,10 +58,10 @@ export default function BlogIndexPage({ blogPosts }: Props) {
                     </td>
                   </tr>
                 </Link>
-              </>
-            );
-          })}
-        </tbody>
+              );
+            })}
+          </tbody>
+        </table>
       </Panel>
     </MainLayout>
   );

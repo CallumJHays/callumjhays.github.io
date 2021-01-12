@@ -1,9 +1,9 @@
 import MainLayout from "layouts/main";
 
-export default function ProjectPage() {
+export default function ContactPage() {
   return (
     <MainLayout>
-      <h1>Projects</h1>
+      <h1>Contact</h1>
     </MainLayout>
   );
 }

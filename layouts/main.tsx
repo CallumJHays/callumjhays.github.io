@@ -1,4 +1,5 @@
-import StyledLink from "components/StyledLink";
+// import StyledLink from "components/StyledLink";
+import Link from "next/link";
 
 export default function MainLayout({ children, footer = true }) {
   return (
@@ -9,11 +10,31 @@ export default function MainLayout({ children, footer = true }) {
       {footer ? (
         <div className="bg-white border-t border-gray-500">
           <div className="container max-w-3xl mx-auto   grid grid-cols-5 divide-x divide-gray-500 text-center py-2">
-            <StyledLink href="/">Home</StyledLink>
-            <StyledLink href="/projects">Projects</StyledLink>
-            <StyledLink href="/blog">Blog</StyledLink>
-            <StyledLink href="/contact">Contact</StyledLink>
-            <StyledLink href="/resume">Resume</StyledLink>
+            <Link href="/">
+              <h3 className="py-2 hover:underline hover:text-green-500 cursor-pointer">
+                Home
+              </h3>
+            </Link>
+            <Link href="/projects">
+              <h3 className="py-2 hover:underline hover:text-green-500 cursor-pointer">
+                Projects
+              </h3>
+            </Link>
+            <Link href="/blog">
+              <h3 className="py-2 hover:underline hover:text-green-500 cursor-pointer">
+                Blog
+              </h3>
+            </Link>
+            <Link href="/contact">
+              <h3 className="py-2 hover:underline hover:text-green-500 cursor-pointer">
+                Contact
+              </h3>
+            </Link>
+            <Link href="/resume">
+              <h3 className="py-2 hover:underline hover:text-green-500 cursor-pointer">
+                Resume
+              </h3>
+            </Link>
           </div>
         </div>
       ) : null}
