@@ -41,7 +41,7 @@
     "react-tsparticles": "^1.18.11",
     "responsive-loader": "^2.3.0",
     "sharp": "^0.26.2",
-    "styled-jsx-plugin-postcss": "file:../styled-jsx-plugin-postcss",
+    "styled-jsx-plugin-postcss": "git+https://github.com/CallumJHays/styled-jsx-plugin-postcss.git",
     "svg-sprite-loader": "^5.2.1",
     "tailwindcss": "^2.0.2",
     "typescript": "^4.1.3",
