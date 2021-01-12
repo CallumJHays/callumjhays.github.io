@@ -33,8 +33,8 @@ export default function BlogIndexPage({ blogPosts }: Props) {
 
       <h1 className="my-10 ml-4">Blog Posts</h1>
 
-      <Panel className="">
-        <table>
+      <Panel>
+        <table className="w-full">
           <tbody>
             {blogPosts.map((post, idx) => {
               const isLastBlogPost = idx === blogPosts.length - 1;
@@ -42,7 +42,7 @@ export default function BlogIndexPage({ blogPosts }: Props) {
                 <Link key={post.url} href={post.url}>
                   <tr className="cursor-pointer transform transition hover:scale-105">
                     <td
-                      className={`p-2 hidden md:block ${
+                      className={`float-right p-2 hidden sm:block ${
                         isLastBlogPost ? null : "border-b"
                       }`}
                     >
