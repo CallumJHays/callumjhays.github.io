@@ -3,15 +3,15 @@ import Link from "next/link";
 
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
-import { NextSeo } from "next-seo";
+import unwrap from "ts-unwrap";
 
-import MainLayout from "layouts/main";
+import MainLayout from "components/MainLayout";
 import Loader from "components/Loader";
 import Panel from "components/Panel";
 import LinkTextSpan from "components/LinkTextSpan";
 import StyledLink from "components/StyledLink";
 
-function SkillBar({ proficiency }) {
+function SkillBar({ proficiency }: { proficiency: number }) {
   return (
     <div className="whitespace-nowrap ml-2">
       {Array.from({ length: 7 }).map((_, i) => (
@@ -25,10 +25,10 @@ function SkillBar({ proficiency }) {
   );
 }
 
-function ProjectPreview({ name }) {
+function ProjectPreview({ name }: { name: string }) {
   const [active, setActive] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const ref = useRef<HTMLVideoElement>();
+  const ref = useRef<HTMLVideoElement>(null);
 
   const vid = (
     <video
@@ -46,20 +46,21 @@ function ProjectPreview({ name }) {
       <div
         className="h-20 inline-block border-4 border-gray-200"
         onMouseEnter={() => {
-          if (ref.current.preload == "none") {
-            ref.current.preload = "auto";
-            ref.current.onloadeddata = () => {
-              ref.current.play();
+          const vidEl = unwrap(ref.current);
+          if (vidEl.preload == "none") {
+            vidEl.preload = "auto";
+            vidEl.onloadeddata = () => {
+              vidEl.play();
               setLoaded(true);
             };
           } else {
-            ref.current.currentTime = 0;
-            ref.current.play();
+            vidEl.currentTime = 0;
+            vidEl.play();
           }
           setActive(true);
         }}
         onMouseLeave={() => {
-          ref.current.pause();
+          unwrap(ref.current).pause();
           setActive(false);
         }}
       >

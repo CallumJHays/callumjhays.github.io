@@ -1,10 +1,10 @@
 import { HTMLAttributes } from "react";
 
-const Panel: React.FC<HTMLAttributes<HTMLDivElement>> = ({
+export default function Panel({
   children,
   className,
   ...divProps
-}) => {
+}: React.PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
   return (
     <div
       {...divProps}
@@ -15,6 +15,4 @@ const Panel: React.FC<HTMLAttributes<HTMLDivElement>> = ({
       {children}
     </div>
   );
-};
-
-export default Panel;
+}

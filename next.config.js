@@ -1,7 +1,5 @@
-// next.config.js
-const withMdxEnhanced = require("next-mdx-enhanced");
 const withPlugins = require("next-compose-plugins");
-const optimizedImages = require("next-optimized-images");
+const withOptimizedImages = require("next-optimized-images");
 const withVideos = require("next-videos");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -10,7 +8,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 module.exports = withPlugins(
   [
     [
-      optimizedImages,
+      withOptimizedImages,
       {
         responsive: {
           adapter: require("responsive-loader/sharp"),
@@ -19,16 +17,10 @@ module.exports = withPlugins(
     ],
     withVideos,
     withBundleAnalyzer,
-    withMdxEnhanced({
-      defaultLayout: true,
-      layoutPath: "layouts/blog",
-      remarkPlugins: [],
-      rehypePlugins: [],
-    }),
 
     // your other plugins here
   ],
   {
-    pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+    pageExtensions: ["js", "jsx", "ts", "tsx"],
   }
 );

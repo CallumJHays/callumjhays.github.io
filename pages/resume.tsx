@@ -1,4 +1,4 @@
-import MainLayout from "layouts/main";
+import MainLayout from "components/MainLayout";
 
 export default function ResumePage() {
   return (

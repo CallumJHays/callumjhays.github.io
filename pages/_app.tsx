@@ -1,10 +1,11 @@
 import Head from "next/head";
+import { AppProps } from "next/dist/next-server/lib/router/router";
 
 import "./tailwind_include.css";
 import Particles from "react-tsparticles";
 import { DefaultSeo } from "next-seo";
 
-export default function AppRoot({ Component, pageProps }) {
+export default function AppRoot({ Component, pageProps }: AppProps) {
   return (
     <>
       <style jsx global>{`
@@ -14,6 +15,13 @@ export default function AppRoot({ Component, pageProps }) {
 
         h2 {
           @apply text-2xl;
+        }
+
+        /* stole font choice from react docs. looks nice. */
+        * {
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
         }
       `}</style>
 

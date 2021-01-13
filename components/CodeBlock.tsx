@@ -10,24 +10,26 @@ export default function CodeBlock({
   className: string;
 }) {
   return (
-    <Highlight
-      {...defaultProps}
-      code={children}
-      language={className.replace(/language-/, "") as Language}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={className} style={{ ...style, padding: "20px" }}>
-          {tokens.map((line, i) =>
-            i == tokens.length - 1 ? null : ( // the last line is always empty for some reason
-              <div key={i} {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            )
-          )}
-        </pre>
-      )}
-    </Highlight>
+    <div className="my-2 rounded overflow-hidden">
+      <Highlight
+        {...defaultProps}
+        code={children}
+        language={className.replace(/language-/, "") as Language}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre className={className} style={{ ...style, padding: "20px" }}>
+            {tokens.map((line, i) =>
+              i == tokens.length - 1 ? null : ( // the last line is always empty for some reason
+                <div key={i} {...getLineProps({ line, key: i })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </div>
+              )
+            )}
+          </pre>
+        )}
+      </Highlight>
+    </div>
   );
 }

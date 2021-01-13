@@ -1,4 +1,8 @@
-export default function Loader({ loaded, children, dim = true }) {
+export default function Loader({
+  loaded,
+  children,
+  dim = true,
+}: React.PropsWithChildren<{ loaded: boolean; dim?: boolean }>) {
   return (
     <div className="relative">
       {loaded ? null : (

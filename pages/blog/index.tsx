@@ -1,9 +1,10 @@
-import fg from "fast-glob";
+import fs from "fs/promises";
 import { GetStaticProps } from "next";
 import Link from "next/link";
+import matter from "gray-matter";
+
 import Panel from "components/Panel";
-import MainLayout from "layouts/main";
-import StyledLink from "components/StyledLink";
+import MainLayout from "components/MainLayout";
 
 export type FrontMatter = {
   title: string;
@@ -13,11 +14,13 @@ export type FrontMatter = {
   preview: string; // image path (inside assets/blog dir)
   published: string; // 1 Jan 2020 (format)
   edited: string; // 1 Jan 2020 (format)
-  __resourcePath: string; // filepath
+  slug: string; // gets added in /blog/index.tsx
 };
 
+export const POSTS_PATH = "pages/blog/posts";
+
 type Props = {
-  blogPosts: (FrontMatter & { url: string })[];
+  blogPosts: FrontMatter[];
 };
 
 export default function BlogIndexPage({ blogPosts }: Props) {
@@ -37,9 +40,11 @@ export default function BlogIndexPage({ blogPosts }: Props) {
         <table className="w-full">
           <tbody>
             {blogPosts.map((post, idx) => {
+              const url = `/blog/${post.slug}`;
               const isLastBlogPost = idx === blogPosts.length - 1;
+
               return (
-                <Link key={post.url} href={post.url}>
+                <Link key={post.slug} href={url}>
                   <tr className="cursor-pointer transform transition hover:scale-105">
                     <td
                       className={`float-right p-2 hidden sm:block ${
@@ -68,18 +73,17 @@ export default function BlogIndexPage({ blogPosts }: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const blogPosts = await Promise.all(
-    (await fg("pages/blog/*.mdx")).map(async (filepath: string) => {
-      const filename = filepath.match(/blog\/(.*)+\.mdx/)[1];
+  const files = await fs.readdir(POSTS_PATH);
 
-      // this line is very brittle. Webpack doin' some funky magic
-      const frontMatter: FrontMatter = (
-        await import(`pages/blog/${filename}.mdx`)
-      ).frontMatter;
+  const blogPosts = await Promise.all(
+    files.map(async (file) => {
+      const content = await fs.readFile(`${POSTS_PATH}/${file}`);
+      const frontMatter = matter(content).data as FrontMatter;
+      const slug = file.replace(".mdx", "");
 
       return {
-        url: `/blog/${filename}`,
         ...frontMatter,
+        slug,
       };
     })
   );
