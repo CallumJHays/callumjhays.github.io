@@ -1,7 +1,8 @@
 import Head from "next/head";
 
-import "./tailwind.scss";
+import "./tailwind_include.css";
 import Particles from "react-tsparticles";
+import { DefaultSeo } from "next-seo";
 
 export default function AppRoot({ Component, pageProps }) {
   return (
@@ -16,12 +17,18 @@ export default function AppRoot({ Component, pageProps }) {
         }
       `}</style>
 
+      <DefaultSeo
+        title="Cal Hays"
+        description="Callum Hays' Personal Website"
+      />
       <Head>
         <link
           rel="icon"
-          href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👨‍💻</text></svg>'
+          href={`data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">
+                  👨‍💻</text></svg>`}
         />
       </Head>
+
       <Particles
         id="particle-background"
         options={{

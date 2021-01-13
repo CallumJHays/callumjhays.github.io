@@ -79,9 +79,8 @@ function ProjectPreview({ name }) {
 export default function HomePage() {
   return (
     <>
-      <NextSeo title="Cal Hays" description="Callum Hays' Personal Website" />
       <MainLayout footer={false}>
-        <style jsx>{`
+        <style jsx global>{`
           .front-page {
             @apply font-mono grid grid-cols-1 md:grid-cols-6 gap-3;
 
@@ -95,6 +94,7 @@ export default function HomePage() {
             }
           }
         `}</style>
+
         <main className="front-page">
           <article className="md:col-span-4 flex flex-col sm:flex-row justify-center">
             <img
