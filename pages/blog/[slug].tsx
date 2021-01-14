@@ -1,4 +1,4 @@
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 import matter from "gray-matter";
 import dynamic from "next/dynamic";
 import hydrate from "next-mdx-remote/hydrate";

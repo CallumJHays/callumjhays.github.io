@@ -1,4 +1,4 @@
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import matter from "gray-matter";
