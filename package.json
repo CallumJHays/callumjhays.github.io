@@ -43,7 +43,7 @@
     "rehype-preset-minify": "^5.1.0",
     "responsive-loader": "^2.3.0",
     "sharp": "^0.26.2",
-    "styled-jsx-plugin-postcss": "git+https://github.com/CallumJHays/styled-jsx-plugin-postcss.git",
+    "styled-jsx-plugin-postcss": "git+https://github.com/CallumJHays/styled-jsx-plugin-postcss",
     "svg-sprite-loader": "^5.2.1",
     "tailwindcss": "^2.0.2",
     "ts-unwrap": "^1.1.0",
