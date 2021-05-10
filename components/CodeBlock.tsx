@@ -1,21 +1,18 @@
-// src/CodeBlock.js
 import React from "react";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 
 export default function CodeBlock({
   children,
+  language,
   className,
 }: {
   children: string;
-  className: string;
+  language: Language;
+  className?: string;
 }) {
   return (
-    <div className="my-2 rounded overflow-hidden">
-      <Highlight
-        {...defaultProps}
-        code={children}
-        language={className.replace(/language-/, "") as Language}
-      >
+    <div className={`rounded overflow-hidden ${className}`}>
+      <Highlight {...defaultProps} code={children} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={{ ...style, padding: "20px" }}>
             {tokens.map((line, i) =>

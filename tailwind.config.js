@@ -19,5 +19,11 @@ module.exports = {
     //   "2xl": { min: "1536px" },
     // },
   },
+  variants: {
+    extend: {
+      backgroundColor: ["disabled"],
+      cursor: ["disabled"],
+    },
+  },
   plugins: [],
 };

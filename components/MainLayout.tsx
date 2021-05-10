@@ -3,11 +3,14 @@ import Link from "next/link";
 
 export default function MainLayout({
   children,
+  className = "",
   footer = true,
-}: React.PropsWithChildren<{ footer?: boolean }>) {
+}: React.PropsWithChildren<{ footer?: boolean; className?: string }>) {
   return (
     <div className="min-h-screen flex flex-col justify-between">
-      <div className="flex flex-col justify-around align-middle container mx-auto max-w-3xl p-4">
+      <div
+        className={`flex flex-col justify-around align-middle container mx-auto max-w-3xl p-4 ${className}`}
+      >
         {children}
       </div>
 

@@ -114,9 +114,6 @@ export default function HomePage() {
               <p>🌐 Web Development &nbsp;|&nbsp; Robotics 🤖</p>
               <p>
                 🌎 Brisbane, AUS &nbsp;|&nbsp;&nbsp;
-                {/* <a className="cursor-pointer border rounded pt-1 pd-1 pl-3 pr-2 -m-1 bg-gray-50">
-                Contact Me 💬
-              </a> */}
                 <Link href={"/contact"}>
                   <span>
                     <LinkTextSpan>Contact Me</LinkTextSpan> 💬
@@ -188,7 +185,7 @@ export default function HomePage() {
           <div className="md:col-span-6 stout-hidden">
             <div className="h-40">
               <GitHubCalendar username="callumjhays">
-                <ReactTooltip delayShow={50} html />
+                {/* <ReactTooltip delayShow={50} html /> */}
               </GitHubCalendar>
             </div>
           </div>
