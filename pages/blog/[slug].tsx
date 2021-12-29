@@ -36,15 +36,8 @@ export default function PostPage({
   frontMatter: FrontMatter;
 }) {
   const content = hydrate(source, { components });
-  const {
-    title,
-    preview,
-    description,
-    subtitle,
-    published,
-    edited,
-    slug,
-  } = frontMatter;
+  const { title, preview, description, subtitle, published, edited, slug } =
+    frontMatter;
 
   const subtitleText = subtitle ?? description;
 
@@ -127,7 +120,8 @@ export const getStaticPaths = async () => {
       params: {
         slug: path.replace(/\.mdx?$/, ""),
       },
-    }));
+    }))
+    .filter(({ params: { slug } }) => !slug.endsWith(".draft"));
 
   return {
     paths,

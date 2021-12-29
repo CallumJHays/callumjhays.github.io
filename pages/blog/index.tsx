@@ -75,7 +75,7 @@ export default function BlogIndexPage({ blogPosts }: Props) {
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const files = await fs.readdir(POSTS_PATH);
 
-  const blogPosts = await Promise.all(
+  const allBlogPosts = await Promise.all(
     files.map(async (file) => {
       const content = await fs.readFile(`${POSTS_PATH}/${file}`);
       const frontMatter = matter(content).data as FrontMatter;
@@ -88,7 +88,13 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     })
   );
 
+  const publishedBlogPosts = allBlogPosts.filter(
+    ({ slug }) => !slug.endsWith(".draft")
+  );
+
+  console.log({ publishedBlogPosts });
+
   return {
-    props: { blogPosts },
+    props: { blogPosts: publishedBlogPosts },
   };
 };

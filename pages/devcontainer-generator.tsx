@@ -319,11 +319,6 @@ export default function DevContainerGeneratorPage() {
   const [currentStepIdx, _setCurrentStepIdx] = useState<number>(0);
   const [furthestStepIdx, setFurthestStepIdx] = useState<number>(0);
   const formManager = useForm<AppState>();
-  console.log(
-    "render",
-    formManager.formState.errors,
-    formManager.watch("baseImage")
-  );
   const setCurrentStepIdx = (idx: number) => {
     if (idx > furthestStepIdx) {
       setFurthestStepIdx(idx);
