@@ -4,7 +4,7 @@
       "next/babel",
       {
         "styled-jsx": {
-          "plugins": [["styled-jsx-plugin-postcss", { "cacheMem": true }]]
+          "plugins": [["styled-jsx-plugin-postcss"]]
         }
       }
     ]

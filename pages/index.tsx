@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import unwrap from "ts-unwrap";
 
+import Marquee from "react-fast-marquee";
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
 
@@ -28,56 +29,60 @@ function SkillBar({ proficiency }: { proficiency: number }) {
   );
 }
 
-export function ProjectPreview({ videoURL, imgURL, href }: { videoURL: string; imgURL: string | null; href: string | null }) {
-    const [active, setActive] = useState(false);
-    const ref = useRef<HTMLVideoElement>(null);
-  
-    const vid = (
-      <video
-        loop
-        ref={ref}
-        className="h-full"
-        preload="auto"
-        src={videoURL}
-        poster={imgURL ?? undefined}
-      />
-    );
-  
-    return (
-      <Link href={href ?? "#"}>
-        <span>
-          <span
-            className={
-              href
-                ? "h-20 inline-block border-4 border-gray-200 cursor-pointer"
-                : "h-20 inline-block border-4 border-gray-200"
-            }
-            onMouseEnter={() => {
-              const vidEl = unwrap(ref.current);
-              vidEl.currentTime = 0;
-              vidEl.play();
-              setActive(true);
-            }}
-            onMouseLeave={() => {
-              unwrap(ref.current).pause();
-              setActive(false);
-            }}
-          >
-            {vid}
-          </span>
-          <div
+export function ProjectPreview({
+  videoURL,
+  imgURL,
+  id,
+}: {
+  videoURL: string;
+  imgURL: string | null;
+  id: string;
+}) {
+  // const [active, setActive] = useState(false);
+  const ref = useRef<HTMLVideoElement>(null);
+
+  const vid = (
+    <video
+      loop
+      ref={ref}
+      className="h-full"
+      preload="auto"
+      autoPlay={true}
+      src={videoURL}
+      poster={imgURL ?? undefined}
+    />
+  );
+
+  return (
+    <Link href={`/projects#${id}`}>
+      <span>
+        <span
+          className="h-20 inline-block border-4 border-gray-200 cursor-pointer"
+          // onMouseEnter={() => {
+          //   const vidEl = unwrap(ref.current);
+          //   vidEl.currentTime = 0;
+          //   vidEl.play();
+          //   setActive(true);
+          // }}
+          // onMouseLeave={() => {
+          //   unwrap(ref.current).pause();
+          //   setActive(false);
+          // }}
+        >
+          {vid}
+        </span>
+        {/* <div
             className={
               "absolute left-14 -top-56 z-10 h-64 w-96" +
               (active ? "" : " hidden")
             }
           >
             {vid}
-          </div>
-        </span>
-      </Link>
-    );
-  }
-  
+          </div> */}
+      </span>
+    </Link>
+  );
+}
 
 type HomePageProps = {
   blogPosts: FrontMatter[];
@@ -98,8 +103,7 @@ Cheers,
 
   return (
     <>
-      <MainLayout navigation={false} justify="around">
-
+      <MainLayout navigation={false} justifyOuter="around" justifyInner="center">
         <main className="font-mono grid grid-cols-1 md:grid-cols-6 gap-5">
           <article className="md:col-span-4 flex flex-col sm:flex-row justify-center">
             <img
@@ -133,23 +137,16 @@ Cheers,
 
           <Panel className="md:col-span-2 lg:col-span-2 px-4">
             <StyledLink href="/resume" floatRight>
-              See More
+              View Resume
             </StyledLink>
-            <h2 className="mb-2">Skills</h2>
+            <h2 className="pb-2">Skills</h2>
 
             <div className="flex flex-row justify-around">
               <div className="grid grid-cols-2">
-                Electrical: <SkillBar proficiency={5} />
-                Software: <SkillBar proficiency={7} />
-                Mechanical: <SkillBar proficiency={3} />
-                Social: <SkillBar proficiency={4} />
-              </div>
-
-              <div className="grid-cols-2 hidden sm:grid md:hidden">
-                Design: <SkillBar proficiency={3} />
-                Frontend: <SkillBar proficiency={7} />
-                Dev-Ops: <SkillBar proficiency={6} />
-                Data-Science: <SkillBar proficiency={5} />
+                Python: <SkillBar proficiency={7} />
+                React: <SkillBar proficiency={6} />
+                TypeScript: <SkillBar proficiency={6} />
+                DevOps: <SkillBar proficiency={5} />
               </div>
             </div>
           </Panel>
@@ -185,15 +182,20 @@ Cheers,
             </StyledLink>
             <h2 className="pb-2">Projects</h2>
 
-            <div className="overflow-x-scroll whitespace-nowrap">
+            <Marquee
+              className="h-20 relative"
+              pauseOnHover={true}
+              gradientWidth={20}
+            >
               {PROJECTS.map((project) => (
                 <ProjectPreview
+                  id={project.id}
+                  key={project.title}
                   imgURL={project.imageURL}
                   videoURL={project.videoURL}
-                  href={project.href}
                 />
               ))}
-            </div>
+            </Marquee>
           </Panel>
 
           <Panel className="md:col-span-6 pb-8">

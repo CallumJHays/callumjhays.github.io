@@ -15,14 +15,6 @@ type Props = {
 export default function BlogIndexPage({ blogPosts }: Props) {
   return (
     <MainLayout>
-      <style jsx>{`
-        .post-list {
-          @apply grid;
-
-          grid-template-columns: 1fr 8fr;
-        }
-      `}</style>
-
       <h1 className="my-10 ml-4">Blog Posts</h1>
 
       <Panel>

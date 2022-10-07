@@ -38,23 +38,29 @@ function NavBar({side}: {side: "t" | "b"}) {
 export default function MainLayout({
   children,
   navigation = true,
-  justify = "between",
+  justifyInner = "start",
+  justifyOuter = "between",
 }: React.PropsWithChildren<{
   navigation?: boolean;
-  justify?: "between" | "around";
+  justifyOuter?: "between" | "around";
+  justifyInner?: "start" | "center";
 }>) {
   console.log({navigation})
   return (
     <div
       className= {
-        justify === "between"
+        justifyOuter === "between"
           ? "min-h-screen flex flex-col justify-between"
           : "min-h-screen flex flex-col justify-around"
       }
     >
       {navigation ? <NavBar side="t" /> : null}
 
-      <div className="flex flex-col align-middle container mx-auto max-w-3xl p-4 justify-center">
+      <div className={
+        justifyInner === "start"
+          ? "flex flex-grow flex-col align-middle container mx-auto max-w-3xl p-4 justify-start"
+          : "flex flex-grow flex-col align-middle container mx-auto max-w-3xl p-4 justify-center"
+        }>
         {children}
       </div>
 

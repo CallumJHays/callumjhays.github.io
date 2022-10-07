@@ -5,7 +5,10 @@ export default function StyledLink({
   children,
   href,
   floatRight = false,
-}: React.PropsWithChildren<{ href: string; floatRight?: boolean }>) {
+}: React.PropsWithChildren<{
+  href: string;
+  floatRight?: boolean;
+}>) {
   return (
     <Link href={href}>
       <span>

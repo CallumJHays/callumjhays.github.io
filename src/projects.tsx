@@ -1,26 +1,28 @@
 import StyledLink from "components/StyledLink";
-import { ReactChild } from "react";
+import { ReactNode } from "react";
 
 
 export type ProjectDescription = {
     title: string;
-    subtitle: ReactChild;
+    id: string;
+    subtitle: ReactNode;
     imageURL: string | null;
     videoURL: string;
     tags: string[];
-    href: string;
+    githubURL: string | null;
 }
 
 export const PROJECTS: ProjectDescription[] = [
     {
         title: "Droid Racing Challenge",
+        id: "droid-racing-challenge",
         subtitle: <>
             Winning Entry for QUT's Droid Racing Challenge 2021.
             <br />
             Built using <StyledLink href="https://github.com/CallumJHays/bdsim_realtime">BDSim Realtime</StyledLink>
             &nbsp;for all data processing, telemetry and high-level execution control.
             <br />
-            Low-level ESC control is handled by an Arduino.
+            Low-level ESC and Servo control done with Arduino.
             <br />
             <StyledLink href="https://www.youtube.com/watch?v=_i1_FaduE24">
                 YouTube Video
@@ -28,12 +30,13 @@ export const PROJECTS: ProjectDescription[] = [
         </>,
         imageURL: null,
         videoURL: "projects/DroidRacingChallenge.webm",
-        tags: ["python", "bdsim_realtime", "remote-control", "webapp",
-               "opencv", "nvidia jetson", "arm64", "arduino", "c++", "c", "embedded"],
-        href: "https://github.com/CallumJHays/bdsim_realtime"
+        tags: ["Python", "BDSim Realtime", "Remote-Control", "Webapp",
+               "OpenCV", "Nvidia Jetson", "ARM64", "Arduino", "C++", "C", "Embedded"],
+        githubURL: null
     },
     {
         title: "BDSim Realtime",
+        id: "bdsim-realtime",
         subtitle: <>
             Real-time execution, remote monitoring and tuning of block-diagrams
             for streamlined modeling, simulation and control of dynamical systems in Python.
@@ -43,12 +46,13 @@ export const PROJECTS: ProjectDescription[] = [
         </>,
         imageURL: "projects/BdsimWeb.png",
         videoURL: "projects/BdsimWeb.webm",
-        tags: ["python", "react", "realtime", "remote-control", "telemetry", "block-diagram", "modeling", "simulation", "remote-control", "webapp",
-               "opencv", "computer-vision", "tuning", "control-theory", "signal-analysis"],
-        href: "https://github.com/CallumJHays/bdsim_realtime"
+        tags: ["Python", "React", "Realtime", "Remote-Control", "Telemetry", "Block-Diagram", "Modeling", "Simulation", "webapp",
+               "OpenCV", "Computer-Vision", "Tuning", "Control-Theory", "Signal-Analysis"],
+        githubURL: "https://github.com/CallumJHays/bdsim_realtime"
     },
     {
         title: "Hillary the Hexapod",
+        id: "hillary-the-hexapod",
         subtitle: <>
             Remote control, live calibration and 3D visualisation for&nbsp; 
             <StyledLink href="https://www.qut.edu.au/robotics-club">QUT Robotics Club</StyledLink>
@@ -56,12 +60,13 @@ export const PROJECTS: ProjectDescription[] = [
         </>,
         imageURL: "projects/Hillary.png",
         videoURL: "projects/Hillary.webm",
-        tags: ["python", "react", "remote-control", "webapp",
-               "kinematics", "robotics", "calibration", "joystick"],
-        href: "https://github.com/CallumJHays/bdsim_realtime"
+        tags: ["Python", "React", "Remote-Control", "Webapp",
+               "Kinematics", "Robotics", "Calibration", "Joystick"],
+        githubURL: "https://github.com/qut-robotics-club/hillary-hexapod"
     },
     {
-        title: "RooBlocks",
+        title: "Roo-Blocks",
+        id: "roo-blocks",
         subtitle: <span>
             Child-friendly electron app for controlling an ESP32
             over Bluetooth using Blockly.
@@ -70,8 +75,7 @@ export const PROJECTS: ProjectDescription[] = [
         </span>,
         imageURL: "projects/RooBlocks.png",
         videoURL: "projects/RooBlocks.webm",
-        tags: ["python", "realtime", "block-diagram", "modeling", "simulation", "remote-control", "webapp",
-               "opencv", "computer-vision", "tuner", "control-theory", "signal-analysis"],
-        href: "https://github.com/CallumJHays/RooBlocks"
+        tags: ["ESP32", "MicroPython", "Bluetooth", "Blockly", "Electron", "TypeScript", "react"],
+        githubURL: "https://github.com/CallumJHays/Roo-Blocks"
     },
 ]

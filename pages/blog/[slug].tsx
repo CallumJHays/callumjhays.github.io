@@ -2,9 +2,11 @@ import { promises as fs } from "fs";
 import matter from "gray-matter";
 import dynamic from "next/dynamic";
 import hydrate from "next-mdx-remote/hydrate";
+ // @ts-ignore
+import serialize from "next-mdx-remote/serialize";
 import { MdxRemote } from "next-mdx-remote/types";
 import renderToString from "next-mdx-remote/render-to-string";
-import { MDXProvider } from "@mdx-js/react";
+import { MDXProvider, MDXProviderComponents } from "@mdx-js/react";
 import { DiscussionEmbed } from "disqus-react";
 
 import StyledLink from "components/StyledLink";
@@ -16,8 +18,8 @@ import { NextSeo } from "next-seo";
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
 // to handle import statements. Instead, you must include components in scope
 // here.
-const components: MdxRemote.Components = {
-  a: StyledLink,
+const components: MDXProviderComponents = {
+  a: StyledLink, 
   // Dynamic import so posts without codeblock don't dl it
   code: dynamic(() => import("components/CodeBlock")),
   inlineCode: ({ children }: React.PropsWithChildren<{}>) => (
@@ -31,9 +33,10 @@ export default function PostPage({
   source,
   frontMatter,
 }: {
-  source: string;
+  source: MdxRemote.Source;
   frontMatter: FrontMatter;
 }) {
+   // @ts-ignore
   const content = hydrate(source, { components });
   const {
     title,
@@ -104,6 +107,7 @@ export const getStaticProps = async ({
   const { content, data } = matter(source);
 
   const mdxSource = await renderToString(content, {
+    // @ts-ignore: typings seem to have broken after updating next-remote-mdx
     components,
     // Optionally pass remark/rehype plugins
     mdxOptions: {
