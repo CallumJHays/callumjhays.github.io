@@ -5,7 +5,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-module.exports = withPlugins(
+// compatability hack for nextjs >=12.2.3
+// https://github.com/cyrilwanner/next-compose-plugins/issues/59#issuecomment-1261357370
+module.exports = async (phase) => withPlugins(
   [
     [
       withOptimizedImages,
@@ -22,5 +24,10 @@ module.exports = withPlugins(
   ],
   {
     pageExtensions: ["js", "jsx", "ts", "tsx"],
+    // https://github.com/cyrilwanner/next-optimized-images/issues/284#issuecomment-1242425959
+    // handleImages: ['*'],
+    images: {
+      disableStaticImages: true,
+    }
   }
-);
+)(phase, { undefined });

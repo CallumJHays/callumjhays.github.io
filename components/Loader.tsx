@@ -14,7 +14,7 @@ export default function Loader({
         >
           <img
             className="animate-spin h-20"
-            src={require("assets/Spinner.svg").default}
+            src={require("public/Spinner.svg").default}
           />
         </div>
       )}

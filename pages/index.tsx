@@ -1,15 +1,18 @@
-import { useRef, useState } from "react";
 import Link from "next/link";
+import { useRef, useState } from "react";
+import unwrap from "ts-unwrap";
 
 import GitHubCalendar from "react-github-calendar";
 import ReactTooltip from "react-tooltip";
-import unwrap from "ts-unwrap";
 
 import MainLayout from "components/MainLayout";
-import Loader from "components/Loader";
 import Panel from "components/Panel";
 import LinkTextSpan from "components/LinkTextSpan";
 import StyledLink from "components/StyledLink";
+import BlogTable from "components/BlogTable";
+import getBlogPosts, { FrontMatter } from "src/getBlogPosts";
+import { GetStaticProps } from "next";
+import { PROJECTS } from "src/projects";
 
 function SkillBar({ proficiency }: { proficiency: number }) {
   return (
@@ -25,112 +28,114 @@ function SkillBar({ proficiency }: { proficiency: number }) {
   );
 }
 
-function ProjectPreview({ name }: { name: string }) {
-  const [active, setActive] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  const ref = useRef<HTMLVideoElement>(null);
-
-  const vid = (
-    <video
-      loop
-      ref={ref}
-      className="h-full"
-      preload="none"
-      src={require(`assets/index/${name}.webm`)}
-      poster={require(`assets/index/${name}.png`)}
-    />
-  );
-
-  return (
-    <>
-      <div
-        className="h-20 inline-block border-4 border-gray-200"
-        onMouseEnter={() => {
-          const vidEl = unwrap(ref.current);
-          if (vidEl.preload == "none") {
-            vidEl.preload = "auto";
-            vidEl.onloadeddata = () => {
-              vidEl.play();
-              setLoaded(true);
-            };
-          } else {
-            vidEl.currentTime = 0;
-            vidEl.play();
-          }
-          setActive(true);
-        }}
-        onMouseLeave={() => {
-          unwrap(ref.current).pause();
-          setActive(false);
-        }}
-      >
-        {vid}
-      </div>
-      <div
-        className={
-          "absolute left-14 -top-56 z-10 h-64 w-96" + (active ? "" : " hidden")
-        }
-      >
-        <Loader loaded={loaded}>{vid}</Loader>
-      </div>
-    </>
-  );
-}
-
-export default function HomePage() {
-  return (
-    <>
-      <MainLayout footer={false}>
-        <style jsx global>{`
-          .front-page {
-            @apply font-mono grid grid-cols-1 md:grid-cols-6 gap-3;
-
-            max-height: 41rem;
-          }
-
-          /* don't show github if it makes page fit awkwardly */
-          @media screen and (width >= 768px) and (300px <= height < 640px) {
-            .stout-hidden {
-              display: none;
+export function ProjectPreview({ videoURL, imgURL, href }: { videoURL: string; imgURL: string | null; href: string | null }) {
+    const [active, setActive] = useState(false);
+    const ref = useRef<HTMLVideoElement>(null);
+  
+    const vid = (
+      <video
+        loop
+        ref={ref}
+        className="h-full"
+        preload="auto"
+        src={videoURL}
+        poster={imgURL ?? undefined}
+      />
+    );
+  
+    return (
+      <Link href={href ?? "#"}>
+        <span>
+          <span
+            className={
+              href
+                ? "h-20 inline-block border-4 border-gray-200 cursor-pointer"
+                : "h-20 inline-block border-4 border-gray-200"
             }
-          }
-        `}</style>
+            onMouseEnter={() => {
+              const vidEl = unwrap(ref.current);
+              vidEl.currentTime = 0;
+              vidEl.play();
+              setActive(true);
+            }}
+            onMouseLeave={() => {
+              unwrap(ref.current).pause();
+              setActive(false);
+            }}
+          >
+            {vid}
+          </span>
+          <div
+            className={
+              "absolute left-14 -top-56 z-10 h-64 w-96" +
+              (active ? "" : " hidden")
+            }
+          >
+            {vid}
+          </div>
+        </span>
+      </Link>
+    );
+  }
+  
 
-        <main className="front-page">
+type HomePageProps = {
+  blogPosts: FrontMatter[];
+};
+
+export default function HomePage({ blogPosts }: HomePageProps) {
+  const MAIL_BODY_DEFAULT = encodeURIComponent(`
+G'day Cal,
+
+I saw your website and wanted to get in touch.
+
+I'm interested in working with you on [PROJECT NAME].
+
+...
+
+Cheers,
+[YOUR NAME]`);
+
+  return (
+    <>
+      <MainLayout navigation={false} justify="around">
+
+        <main className="font-mono grid grid-cols-1 md:grid-cols-6 gap-5">
           <article className="md:col-span-4 flex flex-col sm:flex-row justify-center">
             <img
-              src={require("assets/index/me.png?webp&resize")}
+              src={require("public/index/me.png")}
               className="max-h-36 object-contain pr-4"
             />
             <div className="whitespace-nowrap text-center sm:text-left mt-4 sm:mt-0">
               <h1>Callum Hays</h1>
-              <p className="pb-1">
+              <p className="pb-2 pt-2">
                 <i>
-                  &nbsp;Full-time functional programmer;
+                  &nbsp;Full-time functional programmer,
                   <br />
                   &nbsp;Part-time functional person
                 </i>
               </p>
-              <p>🌐 Web Development &nbsp;|&nbsp; Robotics 🤖</p>
+              <p>🌐 Web Developer &nbsp;|&nbsp; Robotics Engineer 🤖</p>
               <p>
                 🌎 Brisbane, AUS &nbsp;|&nbsp;&nbsp;
-                {/* <a className="cursor-pointer border rounded pt-1 pd-1 pl-3 pr-2 -m-1 bg-gray-50">
-                Contact Me 💬
-              </a> */}
-                <Link href={"/contact"}>
+                <Link
+                  href={`mailto:callumjhays@gmail.com?subject=${encodeURIComponent(
+                    "Website Enquiry"
+                  )}&body=${MAIL_BODY_DEFAULT}`}
+                >
                   <span>
-                    <LinkTextSpan>Contact Me</LinkTextSpan> 💬
+                    <LinkTextSpan>callumjhays@gmail.com</LinkTextSpan> 💬
                   </span>
                 </Link>
               </p>
             </div>
           </article>
 
-          <Panel className="md:col-span-2 lg:col-span-2">
+          <Panel className="md:col-span-2 lg:col-span-2 px-4">
             <StyledLink href="/resume" floatRight>
               See More
             </StyledLink>
-            <h2 className="inline">Skills</h2>
+            <h2 className="mb-2">Skills</h2>
 
             <div className="flex flex-row justify-around">
               <div className="grid grid-cols-2">
@@ -149,13 +154,14 @@ export default function HomePage() {
             </div>
           </Panel>
 
-          <Panel className="md:col-span-3">
+          <Panel className="md:col-span-3 p-2 relative">
             <StyledLink href="/resume" floatRight>
               See More
             </StyledLink>
 
-            <h2>Experience</h2>
+            <h2 className="mb-2">Experience</h2>
             <ul className="list-disc list-inside text-sm">
+              <li>Lead Software Engineer @ Lyro Robotics</li>
               <li>Techstars Music Alumni (2017)</li>
               <li>Software Engineer @ Popgun AI</li>
               <li>Desktop Model Control Engineer @ Verton</li>
@@ -164,34 +170,50 @@ export default function HomePage() {
             </ul>
           </Panel>
 
-          <Panel className="row-span-2 md:col-span-3">
-            <h2>Blog</h2>
-            <p>Python Annotated type</p>
+          <Panel className="row-span-2 md:col-span-3 p-2">
+            <StyledLink href="/blog" floatRight>
+              See More
+            </StyledLink>
+            <h2 className="pb-2">Blog Posts</h2>
 
-            <StyledLink href="/blog">See More</StyledLink>
+            <BlogTable blogPosts={blogPosts} small={true} />
           </Panel>
 
           <Panel className="md:col-span-3 relative">
             <StyledLink href="/projects" floatRight>
               See All
             </StyledLink>
-            <h2>Projects</h2>
+            <h2 className="pb-2">Projects</h2>
 
             <div className="overflow-x-scroll whitespace-nowrap">
-              <ProjectPreview name="BdsimWeb" />
-              <ProjectPreview name="Hillary" />
-              <ProjectPreview name="RooBlocks" />
-              <ProjectPreview name="ConfigApp" />
+              {PROJECTS.map((project) => (
+                <ProjectPreview
+                  imgURL={project.imageURL}
+                  videoURL={project.videoURL}
+                  href={project.href}
+                />
+              ))}
             </div>
           </Panel>
 
-          <div className="md:col-span-6 stout-hidden">
-            <div className="h-40">
+          <Panel className="md:col-span-6 pb-8">
+            <StyledLink href="https://github.com/CallumJHays" floatRight>
+              github.com/CallumJHays
+            </StyledLink>
+            <h2>Github Activity</h2>
+            <div className="max-h-28 mt-6">
               <GitHubCalendar username="callumjhays">
                 <ReactTooltip delayShow={50} html />
               </GitHubCalendar>
             </div>
-          </div>
+          </Panel>
+          {/* <div className="md:col-span-6 stout-hidden">
+            <div className="h-40 mt-5">
+              <GitHubCalendar username="callumjhays">
+                <ReactTooltip delayShow={50} html />
+              </GitHubCalendar>
+            </div>
+          </div> */}
 
           {/* <div className="md:col-span-2">
           <div className="flex flex-row justify-items-start mb-5 gap-7">
@@ -210,3 +232,8 @@ export default function HomePage() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+  const blogPosts = await getBlogPosts();
+  return { props: { blogPosts } };
+};

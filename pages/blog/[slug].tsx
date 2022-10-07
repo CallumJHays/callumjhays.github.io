@@ -6,11 +6,10 @@ import { MdxRemote } from "next-mdx-remote/types";
 import renderToString from "next-mdx-remote/render-to-string";
 import { MDXProvider } from "@mdx-js/react";
 import { DiscussionEmbed } from "disqus-react";
-import useErrorBoundary from "use-error-boundary"; // for disqus
 
 import StyledLink from "components/StyledLink";
 import MainLayout from "components/MainLayout";
-import { FrontMatter, POSTS_PATH } from ".";
+import { FrontMatter, POSTS_PATH } from "src/getBlogPosts";
 import { NextSeo } from "next-seo";
 
 // Custom components/renderers to pass to MDX.
@@ -51,6 +50,8 @@ export default function PostPage({
   return (
     <MainLayout>
       <NextSeo title={`${title.replace("`", "")}`} description={description} />
+      
+      {/* insert global styles to restyle MDX */}
       <style jsx>
         {`
           & :global(p) {
@@ -58,7 +59,7 @@ export default function PostPage({
           }
         `}
       </style>
-      {/* <img src={require(`assets/blog/${image}`)} className="object-cover" /> */}
+      <img src={require(`public/blog/${preview}`)} className="object-contain h-56" />
 
       <div className="bg-white rounded p-4">
         <h1 className="pb-2">{title}</h1>
@@ -82,7 +83,7 @@ export default function PostPage({
         <DiscussionEmbed
           shortname="callumjhays"
           config={{
-            url: `https://callumjhays.github.io/blog/${slug}`, // might cause issues with SSR
+            url: `https://callumjhays.github.io/blog/${slug}`,
             identifier: slug,
             title: title,
           }}

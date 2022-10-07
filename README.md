@@ -1,10 +1,9 @@
 # A Pointlessly Complex Static Blog Site
 
-- ✅ Pointlessly Complex
 - ✅ Fantastically Flexible
+- ✅ Pointlessly Complex
 - ⬜ PWA
 - ⬜ AMP
-- ⬜ <del>Tests</del> (Who needs em now that we have types?)
 
 ## Stack
 
