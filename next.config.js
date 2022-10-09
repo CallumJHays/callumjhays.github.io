@@ -7,27 +7,25 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 // compatability hack for nextjs >=12.2.3
 // https://github.com/cyrilwanner/next-compose-plugins/issues/59#issuecomment-1261357370
-module.exports = async (phase) => withPlugins(
-  [
+module.exports = async (phase) =>
+  withPlugins(
+    [withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
     [
-      withOptimizedImages,
-      {
-        responsive: {
-          adapter: require("responsive-loader/sharp"),
+      [
+        withOptimizedImages,
+        {
+          responsive: {
+            adapter: require("responsive-loader/sharp"),
+          },
         },
-      },
+      ],
+      withVideos,
     ],
-    withVideos,
-    withBundleAnalyzer,
-
-    // your other plugins here
-  ],
-  {
-    pageExtensions: ["js", "jsx", "ts", "tsx"],
-    // https://github.com/cyrilwanner/next-optimized-images/issues/284#issuecomment-1242425959
-    // handleImages: ['*'],
-    images: {
-      disableStaticImages: true,
+    {
+      pageExtensions: ["js", "jsx", "ts", "tsx"],
+      // https://github.com/cyrilwanner/next-optimized-images/issues/284#issuecomment-1242425959
+      images: {
+        disableStaticImages: true,
+      },
     }
-  }
-)(phase, { undefined });
+  )(phase, { undefined });

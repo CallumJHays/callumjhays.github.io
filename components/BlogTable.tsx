@@ -26,7 +26,7 @@ export default function BlogTable({
                   }
                 >
                   <img
-                    src={require(`public/blog/${post.preview}`)}
+                    src={`blog/${post.preview}`}
                     className={"object-contain"}
                   />
                 </td>

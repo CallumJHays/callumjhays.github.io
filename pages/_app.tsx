@@ -3,7 +3,10 @@ import { AppProps } from "next/app";
 
 import "./tailwind_include.css";
 import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 import { DefaultSeo } from "next-seo";
+import "react-github-activity-feed/dist/light-theme.css"
+// import "octicons/octicons.min.css"
 
 export default function AppRoot({ Component, pageProps }: AppProps) {
   return (
@@ -39,6 +42,7 @@ export default function AppRoot({ Component, pageProps }: AppProps) {
 
       <Particles
         id="particle-background"
+        init={loadFull}
         options={{
           background: {
             color: "#fefefe",
