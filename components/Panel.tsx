@@ -8,7 +8,7 @@ export default function Panel({
   return (
     <div
       {...divProps}
-      className={`border-b-4 border-r-2 rounded border-gray-400 p-2 pb-2 bg-white ${
+      className={`border-b-4 border-r-2 border-l border-t rounded border-gray-300 pl-3 p-2 pb-2 bg-white ${
         className ?? ""
       }`}
     >
