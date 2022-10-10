@@ -1,0 +1,51 @@
+---
+title: Git-Subrepo Cheat Sheet
+subtitle: Git subrepo seems easy to use... until you try. Follow these simple steps to avoid the headache.
+preview: git.png
+published: 10 Oct 2022
+edited: 10 Oct 2022
+---
+
+[git-subrepo](https://github.com/ingydotnet/git-subrepo) promises to be a simple-to-use replacement for git submodules and git subtree.
+Unfortunately I found the readme to be quite hard to follow.
+
+Furthermore, [the highest ranked tutorial on google](http://blog.s-schoener.com/2019-04-20-git-subrepo/)
+misses steps that cause the subrepo to be in a broken state, and the error message is extremely unhelpful.
+
+So, here's the steps I use to get it working as expected.
+All commands must be run from the root of the parent repo.
+
+## Cloning
+```bash
+git subrepo clone <remote-url> <subdir>
+```
+
+## Pulling
+```bash
+git subrepo pull <subdir>
+```
+
+If there were merge conflicts, follow the instructions in the error message.
+I'm an avid vscode user, so I found it easier to open the merge conflict .git subdirectory in vscode,
+and resolve the conflicts there before following the rest of the instructions.
+
+After pretty much every pull, you should run:
+```bash
+git subrepo clean <subdir>
+```
+
+If you don't, any subsequent `git subrepo push` <span style={{color: "red"}}>WILL FAIL with a cryptic error message.</span>
+
+## Pushing
+```bash
+git subrepo push <subdir>
+```
+
+## Parting Words
+
+Hopefully this helps someone else out there get through the massive headache that is git-subrepo.
+
+Why they would design a CLI to be equivalent to git, but the require a different command
+to be run with pretty much every usage without any proper indication of its necessity is beyond me.
+
+I will definitely be considering switching to `git subtree` in the future after this fiasco.
