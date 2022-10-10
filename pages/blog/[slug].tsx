@@ -62,7 +62,7 @@ export default function PostPage({
           }
         `}
       </style>
-      <img src={`public/blog/${preview}`} className="object-contain h-56" />
+      <img src={preview} className="object-contain h-56" />
 
       <div className="bg-white rounded p-4">
         <h1 className="pb-2">{title}</h1>
