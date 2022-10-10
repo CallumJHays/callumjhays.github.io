@@ -1,14 +1,16 @@
 // import StyledLink from "components/StyledLink";
 import Link from "next/link";
 
-function NavBar({side}: {side: "t" | "b"}) {
+function NavBar({ side }: { side: "t" | "b" }) {
   const opposite = side === "t" ? "b" : "t";
   return (
-    <div className={
-        side == "t" ?
-          "bg-white border-gray-500 mb-4 border-b" :
-          "bg-white border-gray-500 mt-4 border-t"
-      }>
+    <div
+      className={
+        side == "t"
+          ? "bg-white border-gray-500 mb-4 border-b"
+          : "bg-white border-gray-500 mt-4 border-t"
+      }
+    >
       <div className="container max-w-3xl mx-auto grid grid-cols-4 divide-x divide-gray-500 text-center py-2">
         <Link href="/">
           <h3 className="py-2 hover:underline hover:text-green-500 cursor-pointer">
@@ -17,7 +19,7 @@ function NavBar({side}: {side: "t" | "b"}) {
         </Link>
         <Link href="/projects">
           <h3 className="py-2 hover:underline hover:text-green-500 cursor-pointer">
-            Projects
+            Personal Projects
           </h3>
         </Link>
         <Link href="/blog">
@@ -45,10 +47,9 @@ export default function MainLayout({
   justifyOuter?: "between" | "around";
   justifyInner?: "start" | "center";
 }>) {
-  console.log({navigation})
   return (
     <div
-      className= {
+      className={
         justifyOuter === "between"
           ? "min-h-screen flex flex-col justify-between"
           : "min-h-screen flex flex-col justify-around"
@@ -56,16 +57,17 @@ export default function MainLayout({
     >
       {navigation ? <NavBar side="t" /> : null}
 
-      <div className={
-        justifyInner === "start"
-          ? "flex flex-grow flex-col align-middle container mx-auto max-w-3xl p-4 justify-start"
-          : "flex flex-grow flex-col align-middle container mx-auto max-w-3xl p-4 justify-center"
-        }>
+      <div
+        className={
+          justifyInner === "start"
+            ? "flex flex-grow flex-col align-middle container mx-auto max-w-3xl p-4 justify-start"
+            : "flex flex-grow flex-col align-middle container mx-auto max-w-3xl p-4 justify-center"
+        }
+      >
         {children}
       </div>
 
       {navigation ? <NavBar side="b" /> : null}
-
     </div>
   );
 }

@@ -5,14 +5,16 @@ export default function StyledLink({
   children,
   href,
   floatRight = false,
+  className = "",
 }: React.PropsWithChildren<{
   href: string;
   floatRight?: boolean;
+  className?: string;
 }>) {
   return (
     <Link href={href}>
       <span>
-        <LinkTextSpan className={floatRight ? "float-right pr-3" : undefined}>
+        <LinkTextSpan className={floatRight ? `float-right pr-3 ${className}` : className}>
           {children}
         </LinkTextSpan>
       </span>

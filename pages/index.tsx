@@ -49,6 +49,9 @@ export function GithubFeed() {
         :global(.gha-footer) {
           height: 30px;
         }
+        :global(.gha-gravatar) {
+          margin-top: 10px;
+        }
       `}</style>
       <GithubActivityFeed user="callumjhays" />
     </div>
@@ -109,10 +112,10 @@ Cheers,
           </article>
 
           <Panel className="md:col-span-6 relative">
-            <StyledLink href="/projects" floatRight>
+            <StyledLink href="/projects" floatRight className="pt-1">
               See All
             </StyledLink>
-            <h2 className="pb-2">Projects</h2>
+            <h2 className="pb-2">Personal Projects</h2>
 
             <Marquee
               className="relative"
@@ -130,7 +133,7 @@ Cheers,
           </Panel>
 
           <Panel className="md:col-span-3 p-2">
-            <StyledLink href="/resume" floatRight>
+            <StyledLink href="/resume" floatRight className="pt-1">
               View Resume
             </StyledLink>
 
@@ -162,10 +165,10 @@ Cheers,
           </Panel> */}
 
           <Panel className="md:col-span-3 p-2">
-            <StyledLink href="/blog" floatRight>
+            <StyledLink href="/blog" floatRight className="pt-1">
               See All
             </StyledLink>
-            <h2 className="pb-2">Blog Posts</h2>
+            <h2 className="pb-2">Blog</h2>
 
             <BlogTable blogPosts={blogPosts} small={true} />
           </Panel>

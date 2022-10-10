@@ -2,8 +2,6 @@ import { promises as fs } from "fs";
 import matter from "gray-matter";
 import dynamic from "next/dynamic";
 import hydrate from "next-mdx-remote/hydrate";
- // @ts-ignore
-import serialize from "next-mdx-remote/serialize";
 import { MdxRemote } from "next-mdx-remote/types";
 import renderToString from "next-mdx-remote/render-to-string";
 import { MDXProvider, MDXProviderComponents } from "@mdx-js/react";
@@ -27,6 +25,7 @@ const components: MDXProviderComponents = {
       {children}
     </span>
   ),
+  h2: ({ children }) => (<h2 className="mt-8">{children}</h2>)
 };
 
 export default function PostPage({
@@ -62,18 +61,18 @@ export default function PostPage({
           }
         `}
       </style>
-      <img src={preview} className="object-contain h-56" />
+      <img src={preview} className="object-contain h-56 m-10" />
 
       <div className="bg-white rounded p-4">
-        <h1 className="pb-2">{title}</h1>
+        <h1 className="mb-8 text-center">{title}</h1>
 
-        {subtitleText ?? <p>{subtitleText}</p>}
+        {subtitleText ? <p className="mb-4 text-center">{subtitleText}</p> : null}
 
-        <div className="text-gray-600 pt-3 flex flex-row justify-between text-sm">
+        <div className="text-gray-600 flex flex-row justify-between text-sm">
           <div>Published {published}</div>
           <div>Edited {edited}</div>
           <div>
-            Written by <StyledLink href="/contact">@CallumJHays</StyledLink>
+            Written by <StyledLink href="/">@CallumJHays</StyledLink>
           </div>
         </div>
 

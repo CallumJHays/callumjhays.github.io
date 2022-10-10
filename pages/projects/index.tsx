@@ -8,8 +8,8 @@ import { PROJECTS } from "src/projects";
 export default function ProjectIndexPage() {
   return (
     <MainLayout>
-      <h1 className="my-10 ml-4 mb-20">Projects</h1>
-      <div className="flex flex-col items-center md:grid md:grid-cols-5 md:gap-10">
+      <h1 className="my-10 ml-4 mb-20">Personal Projects</h1>
+      <div className="flex flex-col items-center md:grid md:grid-cols-5 md:gap-10 mb-32">
         {PROJECTS.map(
           ({ title, subtitle, imageURI, githubURL, tags, id }) => (
             <>

@@ -69,7 +69,7 @@ export const PROJECTS: ProjectDescription[] = [
             Turn-key Github activity feed React component.
             Great for portfolio sites of sporadic open-source developers.
             <br className="mb-2" />
-            Built for practice publishing a React component to NPM with all the bells and whistles.
+            Built for this portfolio site, and to practice publishing a React component to NPM with all the bells and whistles.
             <br className="mb-2" />
             <StyledLink href="/react-github-activity-feed">Storybook Demo / Docs</StyledLink>
         </span>,
