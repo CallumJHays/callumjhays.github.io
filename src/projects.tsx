@@ -39,7 +39,7 @@ export const PROJECTS: ProjectDescription[] = [
             Real-time execution, remote monitoring and tuning of block-diagrams
             for streamlined modeling, simulation and control of dynamical systems in Python.
             <br className="mb-2" />
-            Built atop <StyledLink href="https://github.com/petercorke/bdsim">BDSim</StyledLink>
+            Built upon <StyledLink href="https://github.com/petercorke/bdsim">BDSim</StyledLink>
             &nbsp;for honours thesis project; supervised by renowned robotics professor Peter Corke.
         </>,
         imageURI: "projects/BdsimWeb.webp",
@@ -89,5 +89,19 @@ export const PROJECTS: ProjectDescription[] = [
         imageURI: "projects/RooBlocks.webp",
         tags: ["ESP32", "MicroPython", "Bluetooth", "Blockly", "Electron", "TypeScript", "React"],
         githubURL: "https://github.com/CallumJHays/Roo-Blocks"
+    },
+    {
+        title: "Portfolio Site",
+        id: "portfolio-site",
+        subtitle: <span>
+            Portfolio site you're looking at right now.
+            <br className="mb-2" />
+            Built with Next.js/React and TailwindCSS using solely functional components and hooks.
+            <br className="mb-2" />
+            Auto-deployed to github pages via Github Actions CI/CD.
+        </span>,
+        imageURI: "projects/Portfolio.webp",
+        tags: ["Blog", "Next.js", "React", "TypeScript", "TailwindCSS", "Portfolio"],
+        githubURL: "https://github.com/CallumJHays/callumjhays.github.io"
     },
 ]
