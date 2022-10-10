@@ -54,7 +54,7 @@ export default function AppRoot({ Component, pageProps }: AppProps) {
           },
           particles: {
             number: {
-              value: 80,
+              value: 120,
               density: {
                 enable: true,
                 value_area: 800,
