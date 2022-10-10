@@ -42,6 +42,19 @@ type HomePageProps = {
   blogPosts: FrontMatter[];
 };
 
+export function GithubFeed() {
+  return (
+    <div className="md:col-span-6 md:h-56">
+      <style jsx>{`
+        :global(.gha-footer) {
+          height: 30px;
+        }
+      `}</style>
+      <GithubActivityFeed user="callumjhays" />
+    </div>
+  );
+}
+
 export default function HomePage({ blogPosts }: HomePageProps) {
   const MAIL_BODY_DEFAULT = encodeURIComponent(`
 G'day Cal,
@@ -63,10 +76,10 @@ Cheers,
         justifyInner="center"
       >
         <main className="font-mono grid grid-cols-1 md:grid-cols-6 gap-4">
-          <article className="md:col-span-6 flex flex-col sm:flex-row justify-center">
+          <article className="md:col-span-6 flex flex-col sm:flex-row justify-center mb-5">
             <img
               src={"index/me.png"}
-              className="max-h-36 object-contain mr-14"
+              className=" max-h-40 object-contain sm:mr-14"
             />
             <div className="whitespace-nowrap text-center sm:text-left mt-4 sm:mt-0">
               <h1>Callum Hays</h1>
@@ -77,7 +90,9 @@ Cheers,
                   &nbsp;Part-time functional person
                 </i>
               </p>
-              <p className="bg-white">🌐 Web Developer &nbsp;|&nbsp; Robotics Engineer 🤖</p>
+              <p className="bg-white">
+                🌐 Web Developer &nbsp;|&nbsp; Robotics Engineer 🤖
+              </p>
               <p className="bg-white">
                 🌎 Brisbane, AUS &nbsp;|&nbsp;&nbsp;
                 <Link
@@ -126,10 +141,10 @@ Cheers,
               <li>Software Engineer @ Popgun AI</li>
               <li>Desktop Model Control Engineer @ Verton</li>
               <li>Machine Learning Intern @ Notiv</li>
-              <li>Computer Systems (CAB102) Tutor @ QUT</li>
+              <li>Computer Systems (IFB102) Tutor @ QUT</li>
             </ul>
           </Panel>
-          
+
           {/* <Panel className="md:col-span-2 lg:col-span-2 px-4">
             <StyledLink href="/resume" floatRight>
               View Resume
@@ -148,17 +163,14 @@ Cheers,
 
           <Panel className="md:col-span-3 p-2">
             <StyledLink href="/blog" floatRight>
-              See More
+              See All
             </StyledLink>
             <h2 className="pb-2">Blog Posts</h2>
 
             <BlogTable blogPosts={blogPosts} small={true} />
           </Panel>
 
-          <div className="md:col-span-6 h-56">
-            <GithubActivityFeed user="callumjhays" />
-          </div>
-
+          <GithubFeed />
         </main>
       </MainLayout>
     </>
