@@ -31,6 +31,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - run: yarn install --frozen-lockfile
       - run: yarn build
+        env:
+          NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
       - run: yarn export
 
       - name: Deploy

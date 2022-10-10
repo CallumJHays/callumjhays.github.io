@@ -6091,7 +6091,7 @@ fsevents@^1.2.7:
     bindings "^1.5.0"
     nan "^2.12.1"
 
-fsevents@~2.3.2:
+fsevents@^2.3.2, fsevents@~2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
@@ -8650,6 +8650,13 @@ next@^12.3.1:
     "@next/swc-win32-ia32-msvc" "12.3.1"
     "@next/swc-win32-x64-msvc" "12.3.1"
 
+nextjs-google-analytics@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/nextjs-google-analytics/-/nextjs-google-analytics-2.1.0.tgz#e84acb808fa4468411b99aca3325cc349b697ff3"
+  integrity sha512-7hwLwN9sxNlGEeyzJQe/TL8gy72TBwK9U7M1k3eGXbG4hi+FJkNCg9zOHOlBaYxCPFOLEUWN8aeBPOMj+WnGpA==
+  optionalDependencies:
+    fsevents "^2.3.2"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -10949,10 +10956,10 @@ react-fast-marquee@^1.3.5:
   resolved "https://registry.yarnpkg.com/react-fast-marquee/-/react-fast-marquee-1.3.5.tgz#e53995027102fbec92da90606d7ca89703db9903"
   integrity sha512-eOqLoz4iVVBvi2wN/web8hd2XX9y2Z6CYR7g++7nTVHlTOXBtqyARQJ9rYNpbp179hAzloMx0yBFAo8LpNYmKQ==
 
-react-github-activity-feed@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-github-activity-feed/-/react-github-activity-feed-1.0.2.tgz#f525ee670d66a04aa369e59ac1ca4c7ac0a35834"
-  integrity sha512-KLKFSOZtoXWTYRArArxhdl1/MmLRiW8LYCRkKIQgJOci4LDMh3NwUlLC5+3jPs6ilhSMGMtbK2ERDOxQzizwvA==
+react-github-activity-feed@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-github-activity-feed/-/react-github-activity-feed-3.0.3.tgz#24567b5ec29c9bc02ed5f8b4b076c9a044fb3319"
+  integrity sha512-qCZTrTb2n4iyUEq1UkEvAjLxzQrtDaZTc9nSA/1ti5ZIvgw8eAHW4nBXsRqYDiShicBy1jIXFGA4uT+G/kFZ6A==
   dependencies:
     mustache "^4.2.0"
 

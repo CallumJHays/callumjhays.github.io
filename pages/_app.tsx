@@ -5,8 +5,8 @@ import "./tailwind_include.css";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { DefaultSeo } from "next-seo";
-import "react-github-activity-feed/dist/light-theme.css"
-// import "octicons/octicons.min.css"
+import "react-github-activity-feed/dist/light.css"
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 export default function AppRoot({ Component, pageProps }: AppProps) {
   return (
@@ -32,6 +32,7 @@ export default function AppRoot({ Component, pageProps }: AppProps) {
         title="Cal Hays"
         description="Callum Hays' Personal Website"
       />
+      <GoogleAnalytics trackPageViews />
       <Head>
         <link
           rel="icon"
